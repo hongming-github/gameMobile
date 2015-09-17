@@ -3,7 +3,7 @@
 */
 
 //BOSS被攻击，发动秘技
-function Boss_skill_attacked(tIndex){
+/*function Boss_skill_attacked(tIndex){
     var n = Math.floor(Math.random() * 100) + 1;
 	//把BOSS的秘技和秘技数组进行关联起来
 	for (var i = 0; i < skillArrays.length; i++) {
@@ -63,6 +63,27 @@ function Boss_skill_attack(){
 	}else{
 	 finish=true;
 	}
+}*/
+//BOSS秘技攻击
+function BossSkillAttacked(a,b){
+	console.log("进入BOSS的秘技攻击");
+	for (var i = 0; i < skillArrays.length; i++) {		     
+			if (a.skills[0] == skillArrays[i].id) {
+				fl = skillArrays[i].func;
+				skilltmp = skillArrays[i].mp;
+				skillVar = skillArrays[i].skillVar;
+				skillSuccess = skillArrays[i].success;
+				effect = skillArrays[i].effect;
+				skillName = skillArrays[i].name;
+			}
+	}
+	//var n = Math.floor(Math.random() * 100) + 1;
+	var n=0;
+    if((n<skillSuccess)&&(skilltmp<=a.MP)){
+           console.log("开始调用秘技攻击");	
+            		   
+		   eval(fl+"(a,b)");  
+	}
 }
 //BOSS怒攻击
 function BossPowerAttacked(a,b){
@@ -77,8 +98,8 @@ function BossPowerAttacked(a,b){
 				powerName = powerArrays[i].name;
 			}
 	}
-	//var n = Math.floor(Math.random() * 100) + 1;
-	var n=0;
+	var n = Math.floor(Math.random() * 100) + 1;
+	//var n=0;
     if((n<powerSuccess)&&(powertmp<=a.pow)){
            console.log("开始调用怒攻击");	
             		   
@@ -276,7 +297,7 @@ function PMoZhuaWuDi(a,b){//a attack b
 													                            ai = true;
 													                            setTimeout(enemysAction);
 													                        }else{ console.log("solve still could walk22222");end=false;}
-													                        //drawAll();
+													                        
 													                    }
 													                });//
                                                                 }else{
@@ -301,20 +322,13 @@ function PMoZhuaWuDi(a,b){//a attack b
 	                                                                        }
 	                                                                    }//finish
                                                                     });
-                                                                }
-                                                               
-                                                                
-                                                                
+                                                                }                                                             
+                                                                                                                                
                                                           }//else
                                                      }//finish
             });//we_attack_boss_boss_power_end
         }
-            
-           
-            
-            
-            
-		   
+                                                   		   
 
 	}//realMoZhuaWuDi
     console.log("real mozhuawudi");
@@ -335,8 +349,8 @@ function PMoZhuaWuDi(a,b){//a attack b
 						
                         if (a.HP > 0) {
                             
-                            //var n = Math.floor(Math.random() * 100) + 1; 
-							var n=0;
+                            var n = Math.floor(Math.random() * 100) + 1; 
+							//var n=0;
                             if (n <= powerSuccess) { //
 							    realMoZhuaWuDi(a,b);
 								
@@ -410,27 +424,34 @@ function PMoZhuaWuDi(a,b){//a attack b
     }
     
 }
-/*
+
 //喷火龙技能
-function SPengHuoLong(bossId){
+function SPengHuoLong(a,b){//a attack b
+    console.log("into penhuolong");	
+
+    function realPenHuoLong(a,b){
+
+
+           a.MP -= skilltmp;
+		   b.HP -= skillVar; 
+
   //显示半身像
-  var tVar1 = Math.floor(rpx * roleObj.HP / roleObj.fullHP) + 1;
-  var hp = new rectangle(roleObj.sx, roleObj.sy - 9,roleObj.sx, roleObj.sy - 9, tVar1, 5, "rgb(0,255,0)");
-  var hpBox = new rectangle(roleObj.sx, roleObj.sy - 10,roleObj.sx, roleObj.sy - 10, rpx, 7, "rgb(0,0,0)");
+  var tVar1 = Math.floor(rpx * b.HP / b.fullHP) + 1;
+  var hp = new rectangle(b.sx, b.sy - 9,b.sx, b.sy - 9, tVar1, 5, "rgb(0,255,0)");
+  var hpBox = new rectangle(b.sx, b.sy - 10,b.sx, b.sy - 10, rpx, 7, "rgb(0,0,0)");
   var e = new Image();
   e.src = effect;
-  var skillShow = new pic(roleObj.mapX - rpx - 6, roleObj.mapY - rpx - 15,roleObj.mapX - rpx - 6, roleObj.mapY - rpx - 15, 3 * rpx, 3 * rpx, 0, 0, 350, 350, e);
-  var attackText = new text("-" + skillVar,roleObj.mapX + rpx / 4, roleObj.mapY + rpx / 2, roleObj.mapX + rpx / 4, roleObj.mapY + rpx / 2, "rgb(255,0,0)", "bold 30px FangSong");
+  var skillShow = new pic(b.mapX - rpx - 6, b.mapY - rpx - 15,b.mapX - rpx - 6, b.mapY - rpx - 15, 3 * rpx, 3 * rpx, 0, 0, 350, 350, e);
+  var attackText = new text("-" + skillVar,b.mapX + rpx / 4, b.mapY + rpx / 2, b.mapX + rpx / 4, b.mapY + rpx / 2, "rgb(255,0,0)", "bold 30px FangSong");
   var h = new Image();
-  h.src = enemysArray[bossId].halfBody;
+  h.src = a.halfBody;
   var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
   attackShow.push(hs);
-//  drawAll();
+
   //喷火龙字样
   var t2 = setInterval(function() {
       var sn = new text(skillName.charAt(countInterval),  hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx,hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx, "rgb(153,50,204)", "bold 40px KaiTi");
       attackShow.push(sn);
-  //    drawAll();
       countInterval++;
       if (countInterval == skillName.length + 1) {
            countInterval = 0;
@@ -444,8 +465,8 @@ function SPengHuoLong(bossId){
       if (finish) {
 	        clearInterval(t3);
             finish = false;
-            attackAction(enemysArray[bossId]);
-            flicker(roleObj);
+            attackAction(a);
+            flicker(b);
             attackShow.push(attackText);
             attackShow.push(skillShow);
 			var t4 = setInterval(function() {
@@ -455,10 +476,9 @@ function SPengHuoLong(bossId){
                      } else {
                           skillShow.dx = 0;
                      }
-         //            drawAll();
-                    if (attackText.mapY ==roleObj.mapY) {
+                    if (attackText.mapY == b.mapY) {
                          clearInterval(t4);
-                         enemysArray[bossId].dy = 240;
+                         a.dy = 240;
                          clearArray(attackShow);
 					     //finish=true;
                       }
@@ -471,7 +491,6 @@ function SPengHuoLong(bossId){
                 var t5 = setInterval(function() {
                           hp.swidth--;
                           countInterval++;
-           //               drawAll();
                           if (countInterval == tVar2 || hp.swidth <= 0) {
                               countInterval = 0;
                               clearInterval(t5);
@@ -483,10 +502,178 @@ function SPengHuoLong(bossId){
             }// if (hp.swidth > 0) 
 	  }//finish
   });//t3
-  
+
+    if(judeEnd()){
+    	 var boss_skill_end=setInterval(function(){
+																if(finish){
+																clearInterval(boss_skill_end);
+																finish = false;
+																//如果我方在BOSS的秘技攻击下还活着
+																if (b.HP > 0) {
+																enemyIndex++;
+																if (enemyIndex < enemysArray.length) {
+																	setTimeout(enemysAction, 2000);
+																	} else {
+																		enemyIndex = 0;
+																		count++;
+																		setTimeout(dialogShow, 2000);
+																		ai = false;
+																	}// if (enemyIndex < enemysArray.length) 
+																}
+																//如果我方在BOSS的秘技攻击下死了
+																else{
+																deadEvent(a,b);
+																var tm3 = setInterval(function() {
+																	if (finish) {
+																		finish = false;
+																		clearInterval(tm3);
+																		enemyIndex++;
+																		if (enemyIndex < enemysArray.length) {
+																			setTimeout(enemysAction, 2000);
+																		} else {
+																			enemyIndex = 0;
+																			count++;
+																			setTimeout(dialogShow, 2000);
+																			ai = false;
+																		}
+																	}//finish
+																}); //tm3   
+															}//else
+														}//finish
+		});//var boss_skill_end
+    }
+    else{
+    	 var we_skill_end=setInterval(function (){
+											if (finish){
+												finish=false;
+												clearInterval(we_skill_end);
+												
+												if (b.HP <= 0) {
+													deadEvent(a,b);
+													we_skill_end = setInterval(function() {
+														if (finish) {
+															finish = false;
+															clearInterval(we_skill_end);
+															if (judeEnd()) {
+																//---恢复精神力---
+															    recoverSpirit();
+																//-----------
+															    enemyRoundShow();
+																end = true;
+																ai = true;
+																setTimeout(enemysAction, 500);
+															}else{ end=false;}
+														}
+													});
+												}else{if (judeEnd()) {
+													          	//---恢复精神力---
+															    recoverSpirit();
+																//-----------
+																enemyRoundShow();
+																end = true;
+																ai = true;
+																setTimeout(enemysAction, 500);
+															}else{ end=false;}}
+											}
+										});
+    }
+
+	}//real penhuolong
+
+    if(a instanceof roleInfo){
+          normalAttack(a,b); 
+          att_end = setInterval(function() {
+          if (finish) {
+            finish = false;
+            clearInterval(att_end);
+			
+            if (b.HP > 0) {
+                normalAttack(b,a);
+                var t1 = setInterval(function() {
+                    if (finish) {
+                        finish = false;
+                        clearInterval(t1);
+						
+                        if (a.HP > 0) {
+                            
+                            var n = Math.floor(Math.random() * 100) + 1; 
+							//var n=0;
+                            if (n <= powerSuccess) { //
+							    realPenHuoLong(a,b);
+								
+                            } 	
+							else{
+							
+                                failAlert("发动失败",a);
+									a.dy = 240;
+									if (judeEnd()) {
+										//-
+										 recoverSpirit();
+										//-----------
+										setTimeout(enemyRoundShow,1500);
+										end = true;
+										ai = true;
+										setTimeout(enemysAction,3000);
+									}
+									else{ end=false;}
+                            }
+                        } 
+						
+						else {
+                            deadEvent(null,a);
+                            var t7 = setInterval(function() {
+                                if (finish) {
+                                    finish = false;
+                                    clearInterval(t7);
+                                    if (!judgeOver()) {
+                                        if (judeEnd()) {
+											//--
+											 recoverSpirit();
+											//-----------
+											enemyRoundShow();
+                                            end = true;
+                                            ai = true;
+                                            enemysAction();
+                                        }else{end=false;}
+                                    } 
+									else {game_over_page();}
+                                }
+                            });//
+                        }
+                    }//
+                });//
+            }
+			//
+			else {
+                a.dy = 240;
+                deadEvent(a,b);
+                var t8 = setInterval(function() {
+                    if (finish) {
+                        finish = false;
+                        clearInterval(t8);
+                        if (judeEnd()) {
+								//--
+								recoverSpirit();
+								//-----------
+								enemyRoundShow();
+                            end = true;
+                            ai = true;
+                            setTimeout(enemysAction);
+                        }else{ end=false;}
+                        
+                    }
+                });//
+            }
+        }//
+    });//
+    }else{
+    	realPenHuoLong(a,b);
+    }
  
+
+
 }
-*/
+
 function PSoulAttack() {
 	//保存敌人的下标
     var tIndex;
@@ -534,7 +721,7 @@ function PSoulAttack() {
                                 var t2 = setInterval(function() {
                                     var sn = new text(powerName.charAt(countInterval), hs.sx-mapMovX + hs.swidth + countInterval * rpx, hs.sy-mapMovY + hs.sheight / 2 + rpx,hs.sx-mapMovX + hs.swidth + countInterval * rpx, hs.sy-mapMovY + hs.sheight / 2 + rpx, "rgb(255,255,255)", "bold 40px KaiTi");
                                     attackShow.push(sn);
-                                    //drawAll();
+                                
                                     countInterval++;
                                     if (countInterval == powerName.length + 1) {
                                         countInterval = 0;
@@ -619,7 +806,7 @@ function PSoulAttack() {
 												}
 											}
 										});//tb结束
-                                       // drawAll();
+                                       
                                     }
                                 });//t3结束
                             } 
@@ -763,7 +950,7 @@ function SSoulKill() {
                                             } else {
                                                 skillShow.dx = 0;
                                             }
-                                           // drawAll();
+                                           
                                             if (attackText.mapY == enemysArray[tIndex].mapY) {
                                                 clearInterval(t4);
                                                 rolesArray[rolesIndex].dy = 240;
@@ -779,7 +966,7 @@ function SSoulKill() {
                                             var t5 = setInterval(function() {
                                                 hp.swidth--;
                                                 countInterval++;
-                                               // drawAll();
+                                               
                                                 if (countInterval == tVar2 || hp.swidth <= 0) {
                                                     countInterval = 0;
                                                     clearInterval(t5);
@@ -822,7 +1009,6 @@ function SSoulKill() {
 											}
 										});
                                        
-                                        //drawAll();
                                     }
                                 });
                             } else
@@ -866,7 +1052,7 @@ function SSoulKill() {
                             });
                         }
                         //end=false;
-                        //drawAll();
+                       
                     }
                 });
             } else
@@ -887,7 +1073,6 @@ function SSoulKill() {
                             ai = true;
                             enemysAction();
                         }else{end=false;}
-                        //drawAll();
                     }
                 });
             }
@@ -1103,7 +1288,6 @@ function normalAttack(a, b) {//a攻击b
 
     var at1 = setInterval(function() {
         attackText.mapY--;
-   //     drawAll();
         if (attackText.mapY == b.mapY) {
             clearInterval(at1);
             finish = true;
@@ -1117,7 +1301,6 @@ function normalAttack(a, b) {//a攻击b
         var at2 = setInterval(function() {
             hp.swidth--;
             countInterval++;
-//            drawAll();
             if (countInterval == tVar2 || hp.swidth <= 0) {
                 countInterval = 0;
                 clearInterval(at2);

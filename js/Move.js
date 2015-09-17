@@ -133,135 +133,27 @@ function enemyChange(arr) {
 														//如果是BOSS
 														if(enemysArray[enemyIndex].type==1){
 															//如果BOSS的怒值是满的，则优先发动
-															//if(enemysArray[enemyIndex].pow==enemysArray[enemyIndex].fullPow){
+															if(enemysArray[enemyIndex].pow==enemysArray[enemyIndex].fullPow){
 															
-															  BossPowerAttacked(enemysArray[enemyIndex],roleObj);
-															/*
+															   BossPowerAttacked(enemysArray[enemyIndex],roleObj);
+															
 															}else{
 															   var n = Math.floor(Math.random() * 100) + 1;
 															   console.log("BOSS怒值没满，随机发动   "+n+"  "+powerNumber);
 															   //如果随机数小于等于50，则优先发动怒攻击
 															   if(n<=50){
 																  console.log("进入小于50 ");
-																  BOSS_power_attack();
-																  //BOSS魔抓无敌技能执行完了
-																  var boss_power_end1=setInterval(function(){
-																		if(bossPowerEnd){	
-																		   clearInterval(boss_power_end1);
-																		   bossPowerEnd = false;
-																		   //如果我方在BOSS的秘技攻击下还活着
-																		   if (roleObj.HP > 0) {
-																				 console.log("再次发动怒攻击");
-																				  setTimeout(BOSS_power_attack, 2000); 
-																		   }
-																		   //如果我方在BOSS的秘技攻击下死了
-																		   else{
-																				powerNumber=2;
-																				deadEvent(null,roleObj);
-																				var tm3 = setInterval(function() {
-																						if (finish) {
-																							finish = false;
-																							clearInterval(tm3);
-																							enemyIndex++;
-																							if (enemyIndex < enemysArray.length) {
-																								setTimeout(enemysAction, 2000);
-																							} else {
-																							  enemyIndex = 0;
-																							  count++;
-																							  setTimeout(dialogShow, 2000);
-																							  ai = false;
-																							}
-																						 }//finish
-																				}); //tm3   
-																			}//else
-																		}//finish
-																  });//boss_power_end
-																  var boss_power_end2=setInterval(function(){
-																		if(bossPowerEnd){	
-																		   clearInterval(boss_power_end2);
-																		   bossPowerEnd = false;
-																		   //如果我方在BOSS的秘技攻击下还活着
-																		   if (roleObj.HP > 0) {
-																				  enemysArray[enemyIndex].dy = 240;
-																				  enemyIndex++;
-																				  if (enemyIndex < enemysArray.length) {
-																						setTimeout(enemysAction, 2000);
-																				  } else {	
-																						enemyIndex = 0;
-																						count++;
-																						setTimeout(dialogShow, 2000);
-																						ai = false;
-																				  }
-																			 
-																		   }
-																		   //如果我方在BOSS的秘技攻击下死了
-																		   else{
-																				powerNumber=2;
-																				deadEvent(null,roleObj);
-																				var tm3 = setInterval(function() {
-																						if (finish) {
-																							finish = false;
-																							clearInterval(tm3);
-																							enemyIndex++;
-																							if (enemyIndex < enemysArray.length) {
-																								setTimeout(enemysAction, 2000);
-																							} else {
-																							  enemyIndex = 0;
-																							  count++;
-																							  setTimeout(dialogShow, 2000);
-																							  ai = false;
-																							}
-																						 }//finish
-																				}); //tm3   
-																			}//else
-																		}//finish
-																  });//boss_power_end
+																  BossPowerAttacked(enemysArray[enemyIndex],roleObj);
 															   }
 															   else{//则发动秘技攻击
 																	console.log("进入大于50 ");
-															   //执行BOSS的主动秘技函数
-																  Boss_skill_attack();
-																  var boss_skill_end=setInterval(function(){
-																		  if(finish){
-																			 clearInterval(boss_skill_end);
-																			 finish = false;
-																			 //如果我方在BOSS的秘技攻击下还活着
-																			 if (roleObj.HP > 0) {
-																				 enemyIndex++;
-																				 if (enemyIndex < enemysArray.length) {
-																					 setTimeout(enemysAction, 2000);
-																				 } else {
-																					 enemyIndex = 0;
-																					 count++;
-																					 setTimeout(dialogShow, 2000);
-																					 ai = false;
-																				 }// if (enemyIndex < enemysArray.length) 
-																			 }
-																			 //如果我方在BOSS的秘技攻击下死了
-																			 else{
-																				deadEvent(null,roleObj);
-																				var tm3 = setInterval(function() {
-																					if (finish) {
-																						finish = false;
-																						clearInterval(tm3);
-																						enemyIndex++;
-																						if (enemyIndex < enemysArray.length) {
-																							setTimeout(enemysAction, 2000);
-																						} else {
-																							enemyIndex = 0;
-																							count++;
-																							setTimeout(dialogShow, 2000);
-																							ai = false;
-																						}
-																					}//finish
-																				}); //tm3   
-																			 }//else
-																		  }//finish
-																  });//var boss_skill_end
+															    //执行BOSS的主动秘技函数
+															      BossSkillAttacked(enemysArray[enemyIndex],roleObj);
+																
 															   }//else
 															
 															}//else
-															*/
+															
 														}
 														else
 														//如果是小兵
@@ -353,7 +245,7 @@ function enemyChange(arr) {
 				}
 			}
 		}
-		//drawAll();
+		
 	},10);
 }
 //----------------------------------------------------------------------------------------------------

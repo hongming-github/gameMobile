@@ -687,8 +687,14 @@ function touchStart(e){//触摸
                 skillAtt = false;
                 end = true;
                 clearArray(rangeShow);
-                rolesArray[rolesIndex].MP -= skilltmp;
-                eval(fl + '()');
+                
+                var tIndex;
+                for (var i = 0; i < enemysArray.length; i++) {
+                   if (Math.floor((x-mapMovX) / rpx) * rpx== enemysArray[i].mapX && Math.floor((y-mapMovY) / rpx) * rpx== enemysArray[i].mapY) {
+                           tIndex = i;    
+                   }
+                }
+                eval(fl + '(rolesArray[rolesIndex],enemysArray[tIndex])');
             } else if (MouseClickOnRolesIndex(x, y)) { //鼠标点击在已选中的角色上           
                 clearArray(rangeShow);
                 skillAtt = false;
@@ -1089,7 +1095,7 @@ function touchStart(e){//触摸
              //行走恢复
             recover_walk();
             for (var i = 0; i < skillArrays.length; i++) {
-              console.log("tp:"+tp+"rolesArray[rolesIndex].skills[tp]:"+rolesArray[rolesIndex].skills[tp]+"skillArrays[i].id:"+skillArrays[i].id);
+              
                 if (rolesArray[rolesIndex].skills[tp] == skillArrays[i].id) {
                     fl = skillArrays[i].func;
                     skilltmp = skillArrays[i].mp;
