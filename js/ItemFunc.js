@@ -23,8 +23,7 @@ function IRecoverHP() {
         } else {
             RecoverShow.dx = 0;
         }
-       // drawAll();
-        console.log("t.mapY:"+t.mapY+"rolesArray[rolesIndex].mapY:"+rolesArray[rolesIndex].mapY);
+
         if (t.mapY == rolesArray[rolesIndex].mapY) {
             clearInterval(t1);
             clearArray(attackShow);
@@ -125,8 +124,6 @@ function reconverAction(obj) {
 	  
 	}//for
 
-//	console.log("aaaa是"+aaaa);
-//	console.log("aaaa是"+rolesArray[aaaa].name);
 	
 	//var RecoverShow = new pic(rolesArray[aaaa].sx - rpx, rolesArray[aaaa].sy - rpx,rolesArray[aaaa].sx - rpx, rolesArray[aaaa].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, getAlive);
 	if(needDongHua){

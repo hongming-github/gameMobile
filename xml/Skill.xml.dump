@@ -2,62 +2,62 @@
 <skills>
 	<skill>
 		<skillId>1</skillId> 
-		<skillName>²ĞÊ³ÌìµØ</skillName>
+		<skillName>æ®‹é£Ÿå¤©åœ°</skillName>
 		<skillImg>image/skill/Cstd.jpg</skillImg>
 		<skillMP>10</skillMP>
-		<skillDescription>¶ÔµĞÈËÔì³É60µãµÄÉËº¦</skillDescription>
+		<skillDescription>å¯¹æ•Œäººé€ æˆ60ç‚¹çš„ä¼¤å®³</skillDescription>
 		<skillSuccess>67</skillSuccess>
 		<skillFunc>SSoulKill</skillFunc>
 		<skillVar>60</skillVar>
-		<skillOther>ÌØÊâËµÃ÷</skillOther>
+		<skillOther>ç‰¹æ®Šè¯´æ˜</skillOther>
 		<effect>image/effect/2.png</effect>
 	</skill>
 	<skill>
 		<skillId>2</skillId> 
-		<skillName>Åç»ğÁú</skillName>
+		<skillName>å–·ç«é¾™</skillName>
 		<skillImg>image/skill/Phl.jpg</skillImg>
 		<skillMP>10</skillMP>
-		<skillDescription>¶ÔµĞÈËÔì³É50µãµÄÉËº¦</skillDescription>
+		<skillDescription>å¯¹æ•Œäººé€ æˆ50ç‚¹çš„ä¼¤å®³</skillDescription>
 		<skillSuccess>50</skillSuccess>
 		<skillFunc>SPengHuoLong</skillFunc>
 		<skillVar>50</skillVar>
-		<skillOther>ÌØÊâËµÃ÷</skillOther>
+		<skillOther>ç‰¹æ®Šè¯´æ˜</skillOther>
 		<effect>image/effect/5.png</effect>
 	</skill>
 	<skill>
 		<skillId>3</skillId> 
-		<skillName>ÁÒ»ğÕÆ</skillName>
+		<skillName>çƒˆç«æŒ</skillName>
 		<skillImg>image/skill/Lhz.jpg</skillImg>
 		<skillMP>10</skillMP>
-		<skillDescription>¶ÔµĞÈËÔì³É40µãµÄÉËº¦</skillDescription>
+		<skillDescription>å¯¹æ•Œäººé€ æˆ40ç‚¹çš„ä¼¤å®³</skillDescription>
 		<skillSuccess>100</skillSuccess>
 		<skillFunc>SSoulKill</skillFunc>
 		<skillVar>40</skillVar>
-		<skillOther>ÌØÊâËµÃ÷</skillOther>
+		<skillOther>ç‰¹æ®Šè¯´æ˜</skillOther>
 		<effect>image/effect/8.png</effect>
 	</skill>
 	<skill>
 		<skillId>4</skillId> 
-		<skillName>Ìì»ğ·ÉÂÖ</skillName>
+		<skillName>å¤©ç«é£è½®</skillName>
 		<skillImg>image/skill/Lhz.jpg</skillImg>
 		<skillMP>5</skillMP>
-		<skillDescription>¶ÔµĞÈËÔì³É30µãµÄÉËº¦</skillDescription>
+		<skillDescription>å¯¹æ•Œäººé€ æˆ30ç‚¹çš„ä¼¤å®³</skillDescription>
 		<skillSuccess>34</skillSuccess>
 		<skillFunc>SPengHuoLong</skillFunc>
 		<skillVar>30</skillVar>
-		<skillOther>ÌØÊâËµÃ÷</skillOther>
+		<skillOther>ç‰¹æ®Šè¯´æ˜</skillOther>
 		<effect>image/effect/8.png</effect>
 	</skill>
 		<skill>
 		<skillId>5</skillId> 
-		<skillName>ºÈ¾Æ´ß»êÊõ</skillName>
+		<skillName>å–é…’å‚¬é­‚æœ¯</skillName>
 		<skillImg>image/skill/Lhz.jpg</skillImg>
 		<skillMP>10</skillMP>
-		<skillDescription>ÎüÊÕ¶Ô·½hp50µ½×ÔÉí</skillDescription>
+		<skillDescription>å¸æ”¶å¯¹æ–¹hp50åˆ°è‡ªèº«</skillDescription>
 		<skillSuccess>67</skillSuccess>
 		<skillFunc>HeJiuCuiHunShu</skillFunc>
 		<skillVar>50</skillVar>
-		<skillOther>ÌØÊâËµÃ÷</skillOther>
+		<skillOther>ç‰¹æ®Šè¯´æ˜</skillOther>
 		<effect>image/effect/1.png</effect>
 	</skill>
 </skills>

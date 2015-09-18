@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="GBK"?>
 <enemys>
 	<enemy id="1">
-		<name>¿ì½£</name>
+		<name>å¿«å‰‘</name>
 		<img>image/action/Kj.png</img>
 		<halfBody>image/halfbody/Kj.png</halfBody>
 		<HP>100</HP>
@@ -24,7 +24,7 @@
 		<type>0</type>
 	</enemy>
 	<enemy id="2">
-		<name>Àä½£</name>
+		<name>å†·å‰‘</name>
 		<img>image/action/Lj.png</img>
 		<halfBody>image/halfbody/Lj.png</halfBody>
 		<HP>100</HP>
@@ -47,7 +47,7 @@
 		<type>0</type>
 	</enemy>
 	<enemy id="3">
-		<name>µØÕð</name>
+		<name>åœ°éœ‡</name>
 		<img>image/action/Dz.png</img>
 		<halfBody>image/halfbody/Dz.png</halfBody>
 		<HP>700</HP>
@@ -76,7 +76,7 @@
 		</power>
 	</enemy>
 	<enemy id="4">
-		<name>¿ñ½£</name>
+		<name>ç‹‚å‰‘</name>
 		<img>image/action/Kuangj.png</img>
 		<halfBody>image/halfbody/Kuangj.png</halfBody>
 		<HP>100</HP>
@@ -99,7 +99,7 @@
 		<type>0</type>
 	</enemy>
 	<enemy id="5">
-		<name>Ñª½£</name>
+		<name>è¡€å‰‘</name>
 		<img>image/action/Xj.png</img>
 		<halfBody>image/halfbody/Xj.png</halfBody>
 		<HP>100</HP>
@@ -122,7 +122,7 @@
 		<type>0</type>
 	</enemy>
 	<enemy id="6">
-		<name>·É½£</name>
+		<name>é£žå‰‘</name>
 		<img>image/action/Fj.png</img>
 		<halfBody>image/halfbody/Fj.png</halfBody>
 		<HP>100</HP>
@@ -145,7 +145,7 @@
 		<type>0</type>
 	</enemy>
 	<enemy id="7">
-		<name>Å­½£</name>
+		<name>æ€’å‰‘</name>
 		<img>image/action/Nj.png</img>
 		<halfBody>image/halfbody/Nj.png</halfBody>
 		<HP>10</HP>
@@ -171,7 +171,7 @@
 		</skill>
 	</enemy>
 	<enemy id="8">
-		<name>»¨·ãÔºº¡ÂÞ</name>
+		<name>èŠ±æž«é™¢éª¸ç½—</name>
 		<img>image/action/Hyyhl.png</img>
 		<halfBody>image/halfbody/Hyyhl.png</halfBody>
 		<HP>10</HP>
@@ -194,7 +194,7 @@
 		<type>1</type>
 	</enemy>
 	<enemy id="9">
-		<name>°Ô½£</name>
+		<name>éœ¸å‰‘</name>
 		<img>image/action/Bj.png</img>
 		<halfBody>image/halfbody/Bj.png</halfBody>
 		<HP>1</HP>
@@ -220,7 +220,7 @@
 		</skill>
 	</enemy>
 	<enemy id="10">
-		<name>ÌìÑý</name>
+		<name>å¤©å¦–</name>
 		<img>image/action/Ty.png</img>
 		<halfBody>image/halfbody/Ty.png</halfBody>
 		<HP>1</HP>
@@ -243,7 +243,7 @@
 		<type>0</type>
 	</enemy>
 	<enemy id="11">
-		<name>·ç½£</name>
+		<name>é£Žå‰‘</name>
 		<img>image/action/Fengj.png</img>
 		<halfBody>image/halfbody/Fengj.png</halfBody>
 		<HP>1</HP>
@@ -269,7 +269,7 @@
 		</skill>
 	</enemy>
 	<enemy id="12">
-		<name>»¨½£</name>
+		<name>èŠ±å‰‘</name>
 		<img>image/action/Hj.png</img>
 		<halfBody>image/halfbody/Hj.png</halfBody>
 		<HP>1</HP>
@@ -295,7 +295,7 @@
 		</skill>
 	</enemy>
 	<enemy id="13">
-		<name>Ë®½£</name>
+		<name>æ°´å‰‘</name>
 		<img>image/action/Sj.png</img>
 		<halfBody>image/halfbody/Sj.png</halfBody>
 		<HP>1</HP>

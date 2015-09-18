@@ -769,7 +769,11 @@ function touchStart(e){//触摸
                                             //如果boss的怒值满了，则优先发动
                                             if(enemysArray[tIndex].pow==enemysArray[tIndex].fullPow){
                                                 console.log("因为BOSS满怒值，所以发动怒攻击");
-                                                BossPowerAttacked(enemysArray[tIndex],rolesArray[rolesIndex]);
+                                                if(enemysArray[tIndex].powers[0]!=null)
+                                                {BossPowerAttacked(enemysArray[tIndex],rolesArray[rolesIndex]);}
+                                                else
+                                                {BossSkillAttacked(enemysArray[tIndex],rolesArray[rolesIndex]);}
+                                                //BossPowerAttacked(enemysArray[tIndex],rolesArray[rolesIndex]);
                                                 /*
                                                 Boss_power_attacked(tIndex);
                                                 var boss_power_end1=setInterval(function(){
@@ -913,8 +917,8 @@ function touchStart(e){//触摸
                                                     });//var boss_skill_end
                                                 }else{
                                                     console.log("进入怒攻击");
-                                                    Boss_power_attacked(tIndex);
-                                                    var boss_power_end1=setInterval(function(){
+                                                    BossPowerAttacked(enemysArray[tIndex],rolesArray[rolesIndex]);
+                                                    /*var boss_power_end1=setInterval(function(){
                                                          if(bossPowerEnd){
                                                              console.log("侦听到第一次怒攻击发动结束（不管有没有发动成功）");
                                                               clearInterval(boss_power_end1);
@@ -997,7 +1001,7 @@ function touchStart(e){//触摸
                                                                     });
                                                               }//else
                                                          }//finish
-                                                    });//var boss_power_end2    
+                                                    });//var boss_power_end2 */   
                                                 }//else
                                             }//else
                                         }//if(enemysArray[tIndex].type==1)
@@ -1115,7 +1119,7 @@ function touchStart(e){//触摸
                 clearArray(confirmArray);
                 clearArray(skillArray);
                 clearArray(everything3);
-               //drawAll();
+               
             }
         } else if (MouseOnObj(x, y, cancel)) {
             skillConfirmShow = false;

@@ -135,7 +135,9 @@ function enemyChange(arr) {
 															//如果BOSS的怒值是满的，则优先发动
 															if(enemysArray[enemyIndex].pow==enemysArray[enemyIndex].fullPow){
 															
-															   BossPowerAttacked(enemysArray[enemyIndex],roleObj);
+															   if(enemysArray[enemyIndex].powers[0]!=null)
+															   	{BossPowerAttacked(enemysArray[enemyIndex],roleObj);}
+															   else{BossSkillAttacked(enemysArray[enemyIndex],roleObj);}
 															
 															}else{
 															   var n = Math.floor(Math.random() * 100) + 1;
