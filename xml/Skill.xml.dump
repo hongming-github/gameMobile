@@ -48,7 +48,7 @@
 		<skillOther>特殊说明</skillOther>
 		<effect>image/effect/8.png</effect>
 	</skill>
-		<skill>
+	<skill>
 		<skillId>5</skillId> 
 		<skillName>喝酒催魂术</skillName>
 		<skillImg>image/skill/Lhz.jpg</skillImg>
@@ -57,6 +57,126 @@
 		<skillSuccess>67</skillSuccess>
 		<skillFunc>HeJiuCuiHunShu</skillFunc>
 		<skillVar>50</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>6</skillId> 
+		<skillName>飞隐双身</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>10</skillMP>
+		<skillDescription>吸收对方hp50到自身</skillDescription>
+		<skillSuccess>67</skillSuccess>
+		<skillFunc>HeJiuCuiHunShu</skillFunc>
+		<skillVar>50</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>7</skillId> 
+		<skillName>紫星宝典</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>25</skillMP>
+		<skillDescription>对敌人造成200点的伤害</skillDescription>
+		<skillSuccess>67</skillSuccess>
+		<skillFunc>SSoulKill</skillFunc>
+		<skillVar>200</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>8</skillId> 
+		<skillName>燃烧灵气</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>10</skillMP>
+		<skillDescription>恢复自身hp100</skillDescription>
+		<skillSuccess>100</skillSuccess>
+		<skillFunc>SSoulKill</skillFunc>
+		<skillVar>100</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>9</skillId> 
+		<skillName>天摇地动</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>10</skillMP>
+		<skillDescription>使敌人不能移动3回合</skillDescription>
+		<skillSuccess>100</skillSuccess>
+		<skillFunc>SSoulKill</skillFunc>
+		<skillVar>100</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>10</skillId> 
+		<skillName>旋转陀螺</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>20</skillMP>
+		<skillDescription>对敌人造成100点的伤害</skillDescription>
+		<skillSuccess>50</skillSuccess>
+		<skillFunc>SPengHuoLong</skillFunc>
+		<skillVar>100</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>11</skillId> 
+		<skillName>冲天飞击</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>20</skillMP>
+		<skillDescription>33%概率伤hp30，33%概率伤hp60，34%概率伤hp90</skillDescription>
+		<skillSuccess>100</skillSuccess>
+		<skillFunc>SPengHuoLong</skillFunc>
+		<skillVar>100</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>12</skillId> 
+		<skillName>大爆炸</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>25</skillMP>
+		<skillDescription>对敌人造成120点的伤害</skillDescription>
+		<skillSuccess>67</skillSuccess>
+		<skillFunc>SPengHuoLong</skillFunc>
+		<skillVar>120</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>13</skillId> 
+		<skillName>天地寒冰</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>30</skillMP>
+		<skillDescription>33%概率伤hp100，33%概率伤hp150，34%概率伤hp200</skillDescription>
+		<skillSuccess>100</skillSuccess>
+		<skillFunc>SPengHuoLong</skillFunc>
+		<skillVar>120</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>14</skillId> 
+		<skillName>裂地极冰术</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>20</skillMP>
+		<skillDescription>对敌人造成140点的伤害</skillDescription>
+		<skillSuccess>50</skillSuccess>
+		<skillFunc>SPengHuoLong</skillFunc>
+		<skillVar>140</skillVar>
+		<skillOther>特殊说明</skillOther>
+		<effect>image/effect/1.png</effect>
+	</skill>
+	<skill>
+		<skillId>15</skillId> 
+		<skillName>无影无踪</skillName>
+		<skillImg>image/skill/Lhz.jpg</skillImg>
+		<skillMP>20</skillMP>
+		<skillDescription>对敌人造成140点的伤害</skillDescription>
+		<skillSuccess>50</skillSuccess>
+		<skillFunc>SPengHuoLong</skillFunc>
+		<skillVar>140</skillVar>
 		<skillOther>特殊说明</skillOther>
 		<effect>image/effect/1.png</effect>
 	</skill>
