@@ -70,22 +70,84 @@ function BossSkillAttacked(a,b){
 	for (var i = 0; i < skillArrays.length; i++) {		     
 			if (a.skills[0] == skillArrays[i].id) {
 				fl = skillArrays[i].func;
+				skillid = skillArrays[i].id;
 				skilltmp = skillArrays[i].mp;
 				skillVar = skillArrays[i].skillVar;
 				skillSuccess = skillArrays[i].success;
 				effect = skillArrays[i].effect;
 				skillName = skillArrays[i].name;
-				if(skillArrays[i].id==5){recoverHP=true;}
-				else{recoverHP=false;}
 			}
 	}
 	//var n = Math.floor(Math.random() * 100) + 1;
 	var n=0;
     if((n<skillSuccess)&&(skilltmp<=a.MP)){
-           console.log("开始调用秘技攻击");	
-            		   
+            console.log("开始调用秘技攻击"+skillid);
+                if(skillid == 11){
+                  var n1 = Math.floor(Math.random() * 100) + 1;
+                  if(n1>0 && n1<=33){skillVar = 30;}
+                  if(n1>33 && n1<=66){skillVar = 60;}
+                  if(n1>66 && n1<=100){skillVar = 90;}
+                }
+                if(skillid == 13){
+                  var n2 = Math.floor(Math.random() * 100) + 1;
+                  if(n2>0 && n2<=33){skillVar = 100;}
+                  if(n2>33 && n2<=66){skillVar = 150;}
+                  if(n2>66 && n2<=100){skillVar = 200;}
+                }		
 		   eval(fl+"(a,b)");  
 	}
+	else
+		{
+			mpAlert();
+			
+			setTimeout(function() {
+			if(judeEnd()){//敌人主动攻击我方，敌人mp不足。
+			if (b.HP > 0) {
+																enemyIndex++;
+																if (enemyIndex < enemysArray.length) {
+																	setTimeout(enemysAction, 2000);
+																	} else {
+																		enemyIndex = 0;
+																		count++;
+																		setTimeout(dialogShow, 2000);
+																		ai = false;
+																	}// if (enemyIndex < enemysArray.length) 
+																}
+																//如果我方在BOSS的秘技攻击下死了
+																else{
+																deadEvent(a,b);
+																var tm3 = setInterval(function() {
+																	if (finish) {
+																		finish = false;
+																		clearInterval(tm3);
+																		enemyIndex++;
+																		if (enemyIndex < enemysArray.length) {
+																			setTimeout(enemysAction, 2000);
+																		} else {
+																			enemyIndex = 0;
+																			count++;
+																			setTimeout(dialogShow, 2000);
+																			ai = false;
+																		}
+																	}//finish
+																}); //tm3   
+			 }//else
+            }
+            else{//我方普通攻击敌人，敌人释放秘技且mp不足。           
+				b.dy = 240;
+				if (judeEnd()) {
+				recoverSpirit();
+				enemyRoundShow();
+				end = true;
+				ai = true;
+				setTimeout(enemysAction, 500);
+				}
+				else{end=false;}
+            }
+    		},
+  		    2500);
+
+		}
 }
 //BOSS怒攻击
 function BossPowerAttacked(a,b){
@@ -106,6 +168,57 @@ function BossPowerAttacked(a,b){
            console.log("开始调用怒攻击");	
             		   
 		   eval(fl+"(a,b)");  
+	}
+	else
+	{
+		powAlert();
+
+			setTimeout(function() {
+			if(judeEnd()){//敌人主动攻击我方，敌人mp不足。
+			if (b.HP > 0) {
+																enemyIndex++;
+																if (enemyIndex < enemysArray.length) {
+																	setTimeout(enemysAction, 2000);
+																	} else {
+																		enemyIndex = 0;
+																		count++;
+																		setTimeout(dialogShow, 2000);
+																		ai = false;
+																	}// if (enemyIndex < enemysArray.length) 
+																}
+																//如果我方在BOSS的秘技攻击下死了
+																else{
+																deadEvent(a,b);
+																var tm3 = setInterval(function() {
+																	if (finish) {
+																		finish = false;
+																		clearInterval(tm3);
+																		enemyIndex++;
+																		if (enemyIndex < enemysArray.length) {
+																			setTimeout(enemysAction, 2000);
+																		} else {
+																			enemyIndex = 0;
+																			count++;
+																			setTimeout(dialogShow, 2000);
+																			ai = false;
+																		}
+																	}//finish
+																}); //tm3   
+			 }//else
+            }
+            else{//我方普通攻击敌人，敌人释放秘技且mp不足。           
+				b.dy = 240;
+				if (judeEnd()) {
+				recoverSpirit();
+				enemyRoundShow();
+				end = true;
+				ai = true;
+				setTimeout(enemysAction, 500);
+				}
+				else{end=false;}
+            }
+    		},
+  		    2500);
 	}
 }
 function PMoZhuaWuDi(a,b){//a attack b
@@ -545,9 +658,9 @@ function SPengHuoLong(a,b){//a attack b
     }
     else{
     	 var we_skill_end=setInterval(function (){
-											if (finish){
-												finish=false;
+											if (finish){											
 												clearInterval(we_skill_end);
+												finish=false;
 												
 												if (b.HP <= 0) {
 													deadEvent(a,b);
@@ -566,7 +679,9 @@ function SPengHuoLong(a,b){//a attack b
 															}else{ end=false;}
 														}
 													});
-												}else{if (judeEnd()) {
+												}else{
+													b.dy = 240;
+													if (judeEnd()) {
 													          	//---恢复精神力---
 															    recoverSpirit();
 																//-----------
@@ -1185,8 +1300,6 @@ function SSoulKill() {
                                 var tVar1 = Math.floor(rpx * enemysArray[tIndex].HP / enemysArray[tIndex].fullHP) + 1;
                                 var hp = new rectangle(enemysArray[tIndex].mapX, enemysArray[tIndex].mapY - 9,enemysArray[tIndex].sx, enemysArray[tIndex].sy - 9, tVar1, 5, "rgb(0,255,0)");
                                 var hpBox = new rectangle(enemysArray[tIndex].mapX, enemysArray[tIndex].mapY - 10,enemysArray[tIndex].sx, enemysArray[tIndex].sy - 10, rpx, 7, "rgb(0,0,0)");
-                       //         var hp = new rectangle(enemysArray[tIndex].sx, enemysArray[tIndex].sy - 9,enemysArray[tIndex].sx, enemysArray[tIndex].sy - 9, tVar1, 5, "rgb(0,255,0)");
-                       //         var hpBox = new rectangle(enemysArray[tIndex].sx, enemysArray[tIndex].sy - 10,enemysArray[tIndex].sx, enemysArray[tIndex].sy - 10, rpx, 7, "rgb(0,0,0)");
                                 var e = new Image();
                                 e.src = effect;
                                 var skillShow = new pic(enemysArray[tIndex].mapX - rpx - 6, enemysArray[tIndex].mapY - rpx - 15,enemysArray[tIndex].mapX - rpx - 6, enemysArray[tIndex].mapY - rpx - 15, 3 * rpx, 3 * rpx, 0, 0, 350, 350, e);
@@ -1195,11 +1308,11 @@ function SSoulKill() {
                                 h.src = rolesArray[rolesIndex].halfBody;
                                 var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
 								attackShow.push(hs);
-                                //drawAll();
+                        
                                 var t2 = setInterval(function() {
                                     var sn = new text(skillName.charAt(countInterval),hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx, hs.sx-mapMovX + hs.swidth + countInterval * rpx, hs.sy-mapMovY + hs.sheight / 2 + rpx, "rgb(153,50,204)", "bold 40px KaiTi");
                                     attackShow.push(sn);
-                                   // drawAll();
+                                 
                                     countInterval++;
                                     if (countInterval == skillName.length + 1) {
                                         countInterval = 0;

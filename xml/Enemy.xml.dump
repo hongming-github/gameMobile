@@ -148,7 +148,7 @@
 		<name>怒剑</name>
 		<img>image/action/Nj.png</img>
 		<halfBody>image/halfbody/Nj.png</halfBody>
-		<HP>10</HP>
+		<HP>100</HP>
 		<MP>30</MP>
 		<pow>0</pow>
 		<equipSkill>0</equipSkill>
@@ -167,7 +167,7 @@
 		<tripleCRI>1</tripleCRI>
 		<type>1</type>
 		<skill>
-			<skillId>5</skillId>
+			<skillId>11</skillId>
 		</skill>
 	</enemy>
 	<enemy id="8">

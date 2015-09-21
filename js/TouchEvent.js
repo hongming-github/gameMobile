@@ -694,6 +694,21 @@ function touchStart(e){//触摸
                            tIndex = i;    
                    }
                 }
+
+                if(skillid == 11){
+                  var n = Math.floor(Math.random() * 100) + 1;
+                  if(n>0 && n<=33){skillVar = 30;}
+                  if(n>33 && n<=66){skillVar = 60;}
+                  if(n>66 && n<=100){skillVar = 90;}
+                }
+                if(skillid == 13){
+                  var n = Math.floor(Math.random() * 100) + 1;
+                  if(n>0 && n<=33){skillVar = 100;}
+                  if(n>33 && n<=66){skillVar = 150;}
+                  if(n>66 && n<=100){skillVar = 200;}
+                }
+
+
                 eval(fl + '(rolesArray[rolesIndex],enemysArray[tIndex])');
             } else if (MouseClickOnRolesIndex(x, y)) { //鼠标点击在已选中的角色上           
                 clearArray(rangeShow);
@@ -868,9 +883,9 @@ function touchStart(e){//触摸
                                                 if(n<=50){
                                                     console.log("进入秘技攻击");
                                                     //执行BOSS的秘技函数
-                                                    Boss_skill_attacked(tIndex);
+                                                    BossSkillAttacked(enemysArray[tIndex],rolesArray[rolesIndex]);
                                                     //boss秘技执行完了
-                                                    var boss_skill_end=setInterval(function(){
+                                                    /*var boss_skill_end=setInterval(function(){
                                                          if(finish){
                                                              console.log("boss秘技执行完了");
                                                               clearInterval(boss_skill_end);
@@ -914,7 +929,7 @@ function touchStart(e){//触摸
                                                                     });
                                                               }//else
                                                          }// if(finish)
-                                                    });//var boss_skill_end
+                                                    });//var boss_skill_end*/
                                                 }else{
                                                     console.log("进入怒攻击");
                                                     BossPowerAttacked(enemysArray[tIndex],rolesArray[rolesIndex]);
@@ -1048,7 +1063,7 @@ function touchStart(e){//触摸
                                             }
                                         });
                                     }
-                                    drawAll();
+                                   // drawAll();
                                 }
                             });
                         }  
@@ -1070,7 +1085,7 @@ function touchStart(e){//触摸
                                         },
                                         2000);
                                     }else{end=false;}
-                             //       drawAll();
+                          
                                 }
                             });
                         }
@@ -1102,6 +1117,7 @@ function touchStart(e){//触摸
               
                 if (rolesArray[rolesIndex].skills[tp] == skillArrays[i].id) {
                     fl = skillArrays[i].func;
+                    skillid = skillArrays[i].id;
                     skilltmp = skillArrays[i].mp;
                     skillVar = skillArrays[i].skillVar;
                     skillSuccess = skillArrays[i].success;

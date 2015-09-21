@@ -110,8 +110,8 @@ var skillVar; //技能参数（给敌人多少伤害）
 var skillAtt = false; //是否已选技能
 var skillSuccess; //技能使用成功率
 var skillConfirmShow = false; //确定使用技能攻击的开关
-var recoverHP = false;
-//---------------------------------------------------------------------
+var skillid;//存放id来区分技能类型
+//---------- -----------------------------------------------------------
 var pass;
 var fl; //反射函数，各种技能XML中保存的函数名放到这里
 var confirmArray = []; //确认框内容

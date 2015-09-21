@@ -125,10 +125,10 @@
 		<skillName>冲天飞击</skillName>
 		<skillImg>image/skill/Lhz.jpg</skillImg>
 		<skillMP>20</skillMP>
-		<skillDescription>33%概率伤hp30，33%概率伤hp60，34%概率伤hp90</skillDescription>
+		<skillDescription>33%伤hp30，33%伤hp60，34%伤hp90</skillDescription>
 		<skillSuccess>100</skillSuccess>
 		<skillFunc>SPengHuoLong</skillFunc>
-		<skillVar>100</skillVar>
+		<skillVar>0</skillVar>
 		<skillOther>特殊说明</skillOther>
 		<effect>image/effect/1.png</effect>
 	</skill>
@@ -149,10 +149,10 @@
 		<skillName>天地寒冰</skillName>
 		<skillImg>image/skill/Lhz.jpg</skillImg>
 		<skillMP>30</skillMP>
-		<skillDescription>33%概率伤hp100，33%概率伤hp150，34%概率伤hp200</skillDescription>
+		<skillDescription>33%伤hp100，33%伤hp150，34%伤hp200</skillDescription>
 		<skillSuccess>100</skillSuccess>
 		<skillFunc>SPengHuoLong</skillFunc>
-		<skillVar>120</skillVar>
+		<skillVar>0</skillVar>
 		<skillOther>特殊说明</skillOther>
 		<effect>image/effect/1.png</effect>
 	</skill>
