@@ -62,7 +62,6 @@ function afterRecoverEvent(){
 	   itemArray.push(addRoleName);
 	   itemArray.push(addRoleBg);
 	}
-  // drawAll();
 }
 /*
 	清除回合显示

@@ -69,10 +69,6 @@ function reconverAction(obj) {
 	var aaaa=100;
 	//判断只要是活着的队友即可；----------------
 	
-	//var a=rolesArray[0].sx/48;
-	//var b=rolesArray[0].sy/48;
-//	var a=obj.sx/48;
-//	var b=obj.sy/48;
 	var a=obj.mapX/48;
 	var b=obj.mapY/48;
 	var needDongHua=true;
@@ -90,13 +86,11 @@ function reconverAction(obj) {
 		t[1]=parseInt(t[1]);
 	  if(IsObstacle(aa[i])||IsOutScreen([t[0],t[1]])||IsEnemyHere([t[0],t[1]])||IsBuddyHere([t[0],t[1]])){
 	 console.log("i是");
-         if(i!=3){ continue;}
+         if(i!=3){continue;}
 		 else {needDongHua=false;noEmptyPlace();}	 
       
 	  }
       else{		
-	      // console.log("tpp"+tpp);
-          // console.log("tppf"+deadArray[tpp-1].name);
 	       for(var ii=0;ii<rolesArray.length;ii++){
 		      if( rolesArray[ii].name==deadArray[tpp-1].name){
 				   rolesArray[ii].mapX=t[0]*rpx;
@@ -113,28 +107,22 @@ function reconverAction(obj) {
 		   //处理后事
 		   rolesArray[rolesIndex].items[tp].num -= 1;//道具数量-1
 		   if (rolesArray[rolesIndex].items[tp].num == 0) {
-				//console.log("删除道具的人物下标b"+rolesIndex);
 			  rolesArray[rolesIndex].items.splice(tp, 1);//剔除这个道具
 		   }
 		   deadArray.splice(tpp-1, 1);//死亡数组删除那个复活的对象
-		 //  console.log("deadArray长度"+deadArray.length);
-		   //drawAll();
 		   break;
 	  }//else
 	  
 	}//for
 
 	
-	//var RecoverShow = new pic(rolesArray[aaaa].sx - rpx, rolesArray[aaaa].sy - rpx,rolesArray[aaaa].sx - rpx, rolesArray[aaaa].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, getAlive);
 	if(needDongHua){
 	var RecoverShow = new pic(rolesArray[aaaa].mapX - rpx, rolesArray[aaaa].mapY - rpx,rolesArray[aaaa].sx - rpx, rolesArray[aaaa].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, getAlive);
 	attackShow.push(RecoverShow);	
-	var lt = setInterval(function() {
-		                
-						if (RecoverShow.dx < 4900) {RecoverShow.dx += 350;} 
-						else {RecoverShow.dx = 0;}
-						//drawAll();
-					   },75);
+	var lt = setInterval(function() {	                
+		if (RecoverShow.dx < 4900) {RecoverShow.dx += 350;} 
+		else {RecoverShow.dx = 0;}						
+	},75);
 	setTimeout(function (){
 	               clearInterval(lt);
 	               clearArray(attackShow);

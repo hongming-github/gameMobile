@@ -26,7 +26,7 @@
 		<name>п║ар╩П</name>
 		<img>image/action/Xlh.png</img>
 		<halfBody>image/halfbody/Xlh.png</halfBody>
-		<HP>1000</HP>
+		<HP>1</HP>
 		<MP>50</MP>
 		<pow>100</pow>
 		<equipSkill>0</equipSkill>

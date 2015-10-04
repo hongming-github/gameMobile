@@ -17,6 +17,7 @@ var mapUpMov=false;//地图向上移动的开关
 var mapDownMov=false;//地图向下移动的开关
         
 function touchStart(e){//触摸
+
     e.preventDefault();
     var touch = e.touches[0];
     startX = touch.pageX;    //刚触摸时的坐标   
@@ -1056,14 +1057,12 @@ function touchStart(e){//触摸
                                                         },
                                                         2000);
                                                     }else{end=false;}
-                                                } else {
-                                                  
+                                                } else {                                                 
                                                     game_over_page();
                                                 }
                                             }
                                         });
                                     }
-                                   // drawAll();
                                 }
                             });
                         }  
@@ -1137,6 +1136,12 @@ function touchStart(e){//触摸
                 clearArray(everything3);
                
             }
+            if(skillid==8){
+              skillAtt = false;
+              end = true;
+              clearArray(rangeShow);
+              eval(fl + '()');
+            }
         } else if (MouseOnObj(x, y, cancel)) {
             skillConfirmShow = false;
             skillShow = true;
@@ -1169,7 +1174,6 @@ function touchStart(e){//触摸
                 clearArray(confirmArray);
                 clearArray(powerArray);
                 clearArray(everything3);
-                //drawAll();
             }
         } else 
         if (MouseOnObj(x, y, cancel)) {
@@ -1371,7 +1375,6 @@ function touchStart(e){//触摸
                     }else{end=false;}
                 }
               });*/
-           // drawAll();
              }else
         if (MouseOnObj(x, y, cancel)) { //如果点击取消按钮
             itemConfirmShow = false;
@@ -1435,7 +1438,7 @@ function touchStart(e){//触摸
             }
         }
     }else
-    if(itemShow) { //道具显示，鼠标点击具体的道路的时候，调用showItemConfirm
+    if (itemShow) { //道具显示，鼠标点击具体的道路的时候，调用showItemConfirm
        if(MouseOnObj(x, y, CloseImg)) {
             itemShow = false;
             menuShow = true;
@@ -1450,7 +1453,7 @@ function touchStart(e){//触摸
         }
      } else // if (itemShow)结束
      //--------------------------------------------精神力----------------------------------------------------------------------
-     if (spiritShow) {
+    if (spiritShow) {
         if (MouseOnObj(x, y, CloseImg)) {
             spiritShow = false;
             menuShow = true;
@@ -1674,7 +1677,6 @@ function touchStart(e){//触摸
        // drawAll();
     } else 
     if (!end) { //回合是否结束，end为全局变量，初始化为false
-        //drawAll();
         if (MouseOnRoles(x, y)) { //如果鼠标是飘在我方角色图片上      
               if (firstClick) { //如果第一次点击,firstClick为全局变量，初始化为true
                   console.log("firstClick:"+firstClick);

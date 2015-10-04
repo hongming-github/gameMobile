@@ -91,7 +91,7 @@
 		<skillMP>10</skillMP>
 		<skillDescription>恢复自身hp100</skillDescription>
 		<skillSuccess>100</skillSuccess>
-		<skillFunc>SSoulKill</skillFunc>
+		<skillFunc>RanShaoLingQi</skillFunc>
 		<skillVar>100</skillVar>
 		<skillOther>特殊说明</skillOther>
 		<effect>image/effect/1.png</effect>

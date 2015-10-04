@@ -636,7 +636,7 @@ function SPengHuoLong(a,b){//a attack b
 																}
 																//如果我方在BOSS的秘技攻击下死了
 																else{
-																deadEvent(a,b);
+																deadEvent(null,b);
 																var tm3 = setInterval(function() {
 																	if (finish) {
 																		finish = false;
@@ -787,6 +787,7 @@ function SPengHuoLong(a,b){//a attack b
     }
 
 }
+//喝酒催魂术
 function HeJiuCuiHunShu(a,b){//a attack b
     
     function realHeJiuCuiHunShu(a,b){
@@ -1062,7 +1063,54 @@ function HeJiuCuiHunShu(a,b){//a attack b
     	realHeJiuCuiHunShu(a,b);
     }
 }
+//燃烧灵气
+function RanShaoLingQi(){
+	var thp = rolesArray[rolesIndex].HP;
+    rolesArray[rolesIndex].HP += skillVar;
+    if (rolesArray[rolesIndex].HP > rolesArray[rolesIndex].fullHP) {
+        rolesArray[rolesIndex].HP = rolesArray[rolesIndex].fullHP;
+    }
+    thp = rolesArray[rolesIndex].HP - thp;
+    var s = "HP+" + thp;
+    var t = new text(s,rolesArray[rolesIndex].mapX, rolesArray[rolesIndex].mapY + 1 / 2 * rpx, rolesArray[rolesIndex].sx, rolesArray[rolesIndex].sy + 1 / 2 * rpx, "rgb(0,255,0)", "bold 30px FangSong");
+    var hx = new Image();
+    hx.src = effect;
+    
+    var RecoverShow = new pic(rolesArray[rolesIndex].mapX - rpx,rolesArray[rolesIndex].mapY - rpx,rolesArray[rolesIndex].sx - rpx, rolesArray[rolesIndex].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, hx);
+    attackShow.push(t);
+    attackShow.push(RecoverShow);
+    t1 = setInterval(function() {
+        t.mapY--;
+        if (RecoverShow.dx < 4900) {
+            RecoverShow.dx += 350;
+        } else {
+            RecoverShow.dx = 0;
+        }
 
+        if (t.mapY == rolesArray[rolesIndex].mapY) {
+        	rolesArray[rolesIndex].dy = 240;
+        	finish = true;
+            clearInterval(t1);
+            clearArray(attackShow);
+        }
+    },
+    75);
+    var we_skill_end=setInterval(function (){
+    	if (finish){
+		finish=false;
+		clearInterval(we_skill_end);
+    	if (judeEnd()) {
+		//---恢复精神力---
+		recoverSpirit();
+		//-----------
+		enemyRoundShow();
+		end = true;
+		ai = true;
+		setTimeout(enemysAction, 500);
+	    }else{ end=false;}
+        }//finish
+                     });
+}
 function PSoulAttack() {
 	//保存敌人的下标
     var tIndex;
@@ -1092,9 +1140,7 @@ function PSoulAttack() {
                             var n = Math.floor(Math.random() * 100) + 1; //产生1---100随机数
 							//var n=100;
                             if (n <= powerSuccess) { //随机数<怒技成功率
-								console.log("进入怒攻击成功");
-                    //            var hp = new rectangle(enemysArray[tIndex].sx, enemysArray[tIndex].sy - 9,enemysArray[tIndex].sx, enemysArray[tIndex].sy - 9, tVar1, 5, "rgb(0,255,0)");
-                    //            var hpBox = new rectangle(enemysArray[tIndex].sx, enemysArray[tIndex].sy - 10,enemysArray[tIndex].sx, enemysArray[tIndex].sy - 10, rpx, 7, "rgb(0,0,0)");
+								console.log("进入怒攻击成功"); 
                                 var hp = new rectangle(enemysArray[tIndex].mapX, enemysArray[tIndex].mapY - 9,enemysArray[tIndex].sx, enemysArray[tIndex].sy - 9, tVar1, 5, "rgb(0,255,0)");
                                 var hpBox = new rectangle(enemysArray[tIndex].mapX, enemysArray[tIndex].mapY - 10,enemysArray[tIndex].sx, enemysArray[tIndex].sy - 10, rpx, 7, "rgb(0,0,0)");
 								var e = new Image();
@@ -1377,7 +1423,7 @@ function SSoulKill() {
 																//---恢复精神力---
 															    recoverSpirit();
 																//-----------
-															  enemyRoundShow();
+															    enemyRoundShow();
 																end = true;
 																ai = true;
 																setTimeout(enemysAction, 500);
@@ -1700,7 +1746,6 @@ function normalAttack(a, b) {//a攻击b
 //---------------------------------------------------------------------
 function clearArray(arr) {
     while (arr.length > 0) arr.pop();
-   // drawAll();
 }
 function clearArr(arr) {
     while (arr.length > 0) arr.pop();
@@ -1777,7 +1822,6 @@ function deadEvent(objAttack,objDead) {
     var dt = setInterval(function() {
         objDead.sh--;
         objDead.dh--;
-        //alert(finish);
         if (objDead.sh == 0) {
             clearInterval(dt);
           
@@ -1800,7 +1844,6 @@ function deadEvent(objAttack,objDead) {
 					else {finish=true;}
 				}		
         }
-      //  drawAll();
     },
     80);
 }
