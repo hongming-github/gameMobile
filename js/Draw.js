@@ -126,10 +126,14 @@ function drawAll() {
 
 	if(isTouchMove){
        clearArray(everything3);//清除由于touchstart触发的菜单栏
-       bg.sx += slideX;
+       if(slideX<0) {bg.sx-=2;mapMovX-=2;}
+       if(slideX>0) {bg.sx+=2;mapMovX+=2;}
+       if(slideY<0) {bg.sy-=2;mapMovY-=2;}
+       if(slideY>0) {bg.sy+=2;mapMovY+=2;}
+       /*bg.sx += slideX;
        bg.sy += slideY;
        mapMovX += slideX;
-       mapMovY += slideY;
+       mapMovY += slideY;*/
        if(bg.sx <= -288){bg.sx = -288;mapMovX = -288;}
        if(bg.sx >= 0){bg.sx = 0;mapMovX = 0;}
        if(bg.sy <= -192){bg.sy = -192;mapMovY = -192;}
