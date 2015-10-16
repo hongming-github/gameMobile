@@ -532,7 +532,7 @@ function touchStart(e){//触摸
     }else
     if(enemysStatusShow) {//敌人状态显示
             console.log("敌人状态显示  ");
-        if (MouseOnObj(x, y, CloseImg)) {
+        if (MouseOnObj(x, y, CloseImg)|| !MouseOnObj(x, y, statusBg)) {
             enemysStatusShow = false;
             clearArray(statusArray);
             clearArray(speArray);
@@ -592,7 +592,7 @@ function touchStart(e){//触摸
     }else
     if(rolesStatusShow) {//我方状态显示
             console.log("我方状态显示  ");
-        if (MouseOnObj(x, y, CloseImg)) {
+        if (MouseOnObj(x, y, CloseImg) || !MouseOnObj(x, y, statusBg)) {
             rolesStatusShow = false;
             if(!menu2Show){menuShow=true;}
             clearArray(statusArray);

@@ -684,10 +684,8 @@ function spiritAlert(a) {
 	confirmArray.push(title);
     confirmArray.push(confirmText);
 	
-//    drawAll();
     setTimeout(function() {
         clearArray(confirmArray);
-   //     drawAll();
     },
     1000);
 }
@@ -716,7 +714,7 @@ function showRolesDetailStatus(obj,a,b) {
     hf.src = obj.halfBody;
     var halfBody = new picture(0,0,statusBg.sx + 5 / 4 * rpx+20, statusBg.sy + rpx, 200, 200, hf);
     statusArray.push(halfBody);
-    //drawAll();
+
     var name = new text(obj.name, 0,0,statusBg.sx + 8 * rpx + 1 / 4 * rpx+4, statusBg.sy + 5 / 3 * rpx + 4, "rgb(255,255,255)", "bold 25px KaiTi");
     statusArray.push(name);
     var lv = new text("LV " + obj.level + "  " + obj.EXP + "/" + obj.nextEXP,0,0, statusBg.sx + 8 * rpx + 1 / 4 * rpx+4, statusBg.sy + 8 / 3 * rpx + 2, "rgb(255,255,255)", "bold 25px KaiTi");
