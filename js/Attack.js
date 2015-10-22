@@ -96,6 +96,9 @@ function BossSkillAttacked(a,b){
                 }		
 		   eval(fl+"(a,b)");  
 	}
+	else if(n>=skillSuccess){
+		alert("技能发动失败");
+	}
 	else
 		{
 			mpAlert();
@@ -714,7 +717,7 @@ function SPengHuoLong(a,b){//a attack b
                             
                             var n = Math.floor(Math.random() * 100) + 1; 
 							//var n=0;
-                            if (n <= powerSuccess) { //
+                            if (n <= skillSuccess) { //
 							    realPenHuoLong(a,b);
 								
                             } 	
@@ -1110,6 +1113,200 @@ function RanShaoLingQi(){
 	    }else{ end=false;}
         }//finish
                      });
+}
+//天摇地动
+function TianYaoDiDong(a,b){//a attack b
+
+    function realTianYaoDiDong(a,b){
+
+           a.MP -= skilltmp;
+           if(a instanceof roleInfo){
+           	enemyStopMove = true;
+           }
+           else{
+           	roleStopMove = true;
+           }
+           stopCount = skillVar;
+
+  //显示半身像
+  var tVar1 = Math.floor(rpx * b.HP / b.fullHP) + 1;
+  var hp = new rectangle(b.mapX, b.mapY - 9,b.mapX, b.mapY - 9, tVar1, 5, "rgb(0,255,0)");
+  var hpBox = new rectangle(b.mapX, b.mapY - 10,b.mapX, b.mapY - 10, rpx, 7, "rgb(0,0,0)");
+  var e = new Image();
+  e.src = effect;
+  var skillShow = new pic(b.mapX - rpx - 6, b.mapY - rpx - 15,b.mapX - rpx - 6, b.mapY - rpx - 15, 3 * rpx, 3 * rpx, 0, 0, 350, 350, e);
+  var attackText = new text("敌人无法移动" + skillVar + "回合",b.mapX + rpx / 4 - 30, b.mapY + rpx / 2, b.mapX + rpx / 4 - 30, b.mapY + rpx / 2, "rgb(255,0,0)", "bold 5px FangSong");
+  var h = new Image();
+  h.src = a.halfBody
+  var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
+  attackShow.push(hs);
+
+  var t2 = setInterval(function() {
+      var sn = new text(skillName.charAt(countInterval),  hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx,hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx, "rgb(153,50,204)", "bold 40px KaiTi");
+      attackShow.push(sn);
+      countInterval++;
+      if (countInterval == skillName.length + 1) {
+           countInterval = 0;
+           clearInterval(t2);
+           clearArray(attackShow);
+           finish = true;
+       }
+     },
+  500);
+  var t3=setInterval(function(){
+      if (finish) {
+	        clearInterval(t3);
+            finish = false;
+            attackShow.push(attackText);
+            attackShow.push(skillShow);
+			var t4 = setInterval(function() {
+                     attackText.mapY--;
+                     if (skillShow.dx < 4900) {
+                          skillShow.dx += 350;
+                     } else {
+                          skillShow.dx = 0;
+                     }
+                    if (attackText.mapY == b.mapY) {
+                         clearInterval(t4);
+                         a.dy = 240;
+                         clearArray(attackShow);
+					     finish=true;
+                      }
+                      },
+            50);//t4
+	  }//finish
+  });//t3
+
+    if(judeEnd()){//boss主动发动技能
+    	 var boss_skill_end=setInterval(function(){
+						if(finish){
+							clearInterval(boss_skill_end);
+							finish = false;
+							//如果我方在BOSS的秘技攻击下还活着
+							if (b.HP > 0) {
+							enemyIndex++;
+							if (enemyIndex < enemysArray.length) {
+								setTimeout(enemysAction, 2000);
+							} else {
+								enemyIndex = 0;
+								count++;
+								setTimeout(dialogShow, 2000);
+								ai = false;
+							}// if (enemyIndex < enemysArray.length) 
+							}
+							//如果我方在BOSS的秘技攻击下死了															
+							}//finish
+		});//var boss_skill_end
+    }
+    else{//我方主动攻击boss，boss发动技能
+    	 var we_skill_end=setInterval(function (){
+						if (finish){											
+						clearInterval(we_skill_end);
+						finish=false;
+						b.dy = 240;
+						if (judeEnd()) {
+						recoverSpirit();
+						setTimeout(enemyRoundShow,500);
+						end = true;
+						ai = true;
+						setTimeout(enemysAction, 2500);
+						}else{ end=false;}
+					}
+			});
+    }
+
+	}
+
+    if(a instanceof roleInfo){
+          normalAttack(a,b); 
+          att_end = setInterval(function() {
+          if (finish) {
+            finish = false;
+            clearInterval(att_end);
+			
+            if (b.HP > 0) {
+                normalAttack(b,a);
+                var t1 = setInterval(function() {
+                    if (finish) {
+                        finish = false;
+                        clearInterval(t1);
+						
+                        if (a.HP > 0) {
+                            
+                            var n = Math.floor(Math.random() * 100) + 1; 
+							//var n=0;
+                            if (n <= skillSuccess) { //
+							    realTianYaoDiDong(a,b);
+								
+                            } 	
+							else{
+							
+                                failAlert("发动失败",a);
+									a.dy = 240;
+									if (judeEnd()) {
+										//-----------
+										 recoverSpirit();
+										//-----------
+										setTimeout(enemyRoundShow,1500);
+										end = true;
+										ai = true;
+										setTimeout(enemysAction,3000);
+									}
+									else{ end=false;}
+                            }
+                        } 
+						
+						else {
+                            deadEvent(null,a);
+                            var t7 = setInterval(function() {
+                                if (finish) {
+                                    finish = false;
+                                    clearInterval(t7);
+                                    if (!judgeOver()) {
+                                        if (judeEnd()) {
+											//--
+											 recoverSpirit();
+											//-----------
+											enemyRoundShow();
+                                            end = true;
+                                            ai = true;
+                                            enemysAction();
+                                        }else{end=false;}
+                                    } 
+									else {game_over_page();}
+                                }
+                            });//
+                        }
+                    }//
+                });//
+            }
+			//
+			else {
+                a.dy = 240;
+                deadEvent(a,b);
+                var t8 = setInterval(function() {
+                    if (finish) {
+                        finish = false;
+                        clearInterval(t8);
+                        if (judeEnd()) {
+								//--
+								recoverSpirit();
+								//-----------
+								enemyRoundShow();
+                            end = true;
+                            ai = true;
+                            setTimeout(enemysAction);
+                        }else{ end=false;}
+                        
+                    }
+                });//
+            }
+        }
+    });
+    }else{
+    	realTianYaoDiDong(a,b);
+    }
+
 }
 function PSoulAttack() {
 	//保存敌人的下标

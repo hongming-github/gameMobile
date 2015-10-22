@@ -103,8 +103,8 @@
 		<skillMP>10</skillMP>
 		<skillDescription>使敌人不能移动3回合</skillDescription>
 		<skillSuccess>100</skillSuccess>
-		<skillFunc>SSoulKill</skillFunc>
-		<skillVar>100</skillVar>
+		<skillFunc>TianYaoDiDong</skillFunc>
+		<skillVar>3</skillVar>
 		<skillOther>特殊说明</skillOther>
 		<effect>image/effect/1.png</effect>
 	</skill>

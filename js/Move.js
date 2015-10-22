@@ -46,7 +46,6 @@ function change(arr) {
 					clearInterval(tid);
 					countInterval=0;
 					if(checkGuanKa(rolesArray[rolesIndex])&&mapLevel==1){
-					//	alert("1");
 						hasNoRolesWalk=true;
 						IntoGuanKa=true;
 						//nextGuanKaOpen();
@@ -63,7 +62,6 @@ function change(arr) {
 			}
 		}
 		
-		//drawAll();
 
 	},10);
 }
@@ -96,7 +94,7 @@ function enemyChange(arr) {
 			}else
 			if (enemysArray[enemyIndex].mapY == yg) {
 				a++;				
-				if (a<arr.length){			
+				if (a<arr.length){		
 					xg = arr[a][0] * rpx;
 					yg = arr[a][1] * rpx;				
 				}else{

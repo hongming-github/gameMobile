@@ -19,8 +19,8 @@ function enemysAction() {
 				setTimeout(dialogShow, 2000);
 			}
 		}
-		/*
-	    else if (enemysArray[enemyIndex].type==1&& count <= 10&&mapLevel==1) {
+		
+	    else if (enemysArray[enemyIndex].type==1 && count <= 10 && mapLevel==1) {
 			     enemysArray[enemyIndex].dy = 240;
 			     enemyIndex++;
 			 if (enemyIndex < enemysArray.length) {
@@ -32,7 +32,23 @@ function enemysAction() {
 				setTimeout(dialogShow, 2000);
 			}
 		} 
-		*/
+
+		else if(enemyStopMove){
+			stopCount--;
+			for(;enemyIndex < enemysArray.length;enemyIndex++){
+				enemysArray[enemyIndex].dy = 240;
+			}
+			 if (enemyIndex == enemysArray.length) {
+				enemyIndex = 0;
+				ai = false;
+				count++;
+				setTimeout(dialogShow, 2000);
+			 }
+			 if(stopCount == 0){
+			 	enemyStopMove = false;
+			 }
+		}
+		
 		else {
 			var tempMin=new Array(30);
 			var index = null; 

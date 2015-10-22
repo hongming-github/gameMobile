@@ -31,7 +31,6 @@ function infoShow(x, y) {
         clearArray(info);
 		putRec(x,y);
     }
-//	drawAll();
 }
 //绿色的格子随鼠标一起走动
 function putRec(x,y){
@@ -77,7 +76,6 @@ function clearShow() {
     }
     clearArray(everything);
     if(mapLevel==2&&count==1){setTimeout(function(){dialogShowFlag=true;dialogShow();},300);}
-  //  drawAll();
    // saveData();
 }
 /*
@@ -94,11 +92,9 @@ function roundShow() {
     var roundText = new text(roundString, (canvasWidth / 2) - 2 * rpx, 7* rpx - rpx / 2,(canvasWidth / 2) - 2 * rpx, 7* rpx - rpx / 2,"rgb(255,255,255)", "50px 叶根友毛笔行书");
     everything.push(roundRectangle);
     everything.push(roundText);
-	//drawAll();
     setTimeout(clearShow, 2000);
 }
 function enemyRoundShow() {
-	//drawAll();
 	ourTurn.pause();
 	enemyTurn.currentTime = 0;
 	enemyTurn.play();
@@ -157,7 +153,6 @@ function dialog() {
     dialogText = new text(tt,270,470, 270,470, "rgb(0,0,0)", "20px FangSong");
     dialogArray.push(dialogBox);
     if (tf) {
-        dialogArray.push(dialogRole);
     }
     dialogArray.push(dialogText);
     //drawAll();
@@ -168,6 +163,26 @@ function dialog() {
 function dialogShow() {
     if (!dialogShowFlag) {
         roundShow();
+        if(roleStopMove){//我方角色禁止行动
+            stopCount--;
+            for (var i = 0; i < rolesArray.length; i++) {rolesArray[i].dy = 240;}
+            if (judeEnd()) {
+            recoverSpirit();//恢复各种精神力的开关和行走开关
+            ourTurn.pause();   
+            setTimeout(enemyRoundShow,2000);        
+            enemyTurn.currentTime = 0;
+            enemyTurn.play(); 
+            setTimeout(function() {
+            end = true;
+            ai = true;
+            enemysAction();
+            },
+            3500);}
+            
+            if(stopCount==0){
+                roleStopMove = false;
+            }
+        }
     }else{
       for (var i = 0; i < dialogRoundArray.length; i++) {
 		if(IntoGuanKa){

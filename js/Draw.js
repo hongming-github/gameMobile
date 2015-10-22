@@ -199,7 +199,7 @@ function clearAll(){
     clearArray(everything2);
     clearArray(info);
     clearArray(everything);
-	clearArray(shadowShow);
+  	clearArray(shadowShow);
     clearArray(attackShow);
     clearArray(hpShow);
     clearArray(dialogArray);
