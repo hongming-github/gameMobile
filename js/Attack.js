@@ -1308,6 +1308,259 @@ function TianYaoDiDong(a,b){//a attack b
     }
 
 }
+//万年远古冰魂决
+function WanNianYuanGuBingHunJue(a,b){//a attack b
+
+    function realWanNianYuanGuBingHunJue(a,b){
+
+           a.pow -= powertmp;
+		   b.HP -= powerVar;
+		   if(a instanceof roleInfo){
+           	enemyStopMove = true;
+           }
+           else{
+           	roleStopMove = true;
+           }
+           stopCount = 1;
+
+  //显示半身像
+  var tVar1 = Math.floor(rpx * b.HP / b.fullHP) + 1;
+  var hp = new rectangle(b.mapX, b.mapY - 9,b.mapX, b.mapY - 9, tVar1, 5, "rgb(0,255,0)");
+  var hpBox = new rectangle(b.mapX, b.mapY - 10,b.mapX, b.mapY - 10, rpx, 7, "rgb(0,0,0)");
+  var e = new Image();
+  e.src = effect;
+  var powerShow = new pic(b.mapX - rpx - 6, b.mapY - rpx - 15,b.mapX - rpx - 6, b.mapY - rpx - 15, 3 * rpx, 3 * rpx, 0, 0, 350, 350, e);
+  var attackText = new text("-" + powerVar,b.mapX + rpx / 4, b.mapY + rpx / 2, b.mapX + rpx / 4, b.mapY + rpx / 2, "rgb(255,0,0)", "bold 30px FangSong");
+  var h = new Image();
+  h.src = a.halfBody;
+  var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
+  attackShow.push(hs);
+
+  //喷火龙字样
+  var t2 = setInterval(function() {
+      var sn = new text(powerName.charAt(countInterval),  hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx,hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx, "rgb(153,50,204)", "bold 40px KaiTi");
+      attackShow.push(sn);
+      countInterval++;
+      if (countInterval == powerName.length + 1) {
+           countInterval = 0;
+           clearInterval(t2);
+           clearArray(attackShow);
+           finish = true;
+       }
+     },
+  500);//t2
+  var t3=setInterval(function(){
+      if (finish) {
+	        clearInterval(t3);
+            finish = false;
+            attackAction(a);
+            flicker(b);
+            attackShow.push(attackText);
+            attackShow.push(powerShow);
+			var t4 = setInterval(function() {
+                     attackText.mapY--;
+                     if (powerShow.dx < 4900) {
+                          powerShow.dx += 350;
+                     } else {
+                          powerShow.dx = 0;
+                     }
+                    if (attackText.mapY == b.mapY) {
+                         clearInterval(t4);
+                         a.dy = 240;
+                         clearArray(attackShow);
+					     //finish=true;
+                      }
+                      },
+            50);//t4
+	        if (hp.swidth > 0) {
+                hpShow.push(hpBox);
+                hpShow.push(hp);
+                var tVar2 = Math.floor(rpx * powerVar / b.fullHP) + 1;
+                var t5 = setInterval(function() {
+                          hp.swidth--;
+                          countInterval++;
+                          if (countInterval == tVar2 || hp.swidth <= 0) {
+                              countInterval = 0;
+                              clearInterval(t5);
+                              clearArray(hpShow);
+							  finish=true;
+                          }
+                       },
+                50);//t5
+            }// if (hp.swidth > 0) 
+	  }//finish
+  });//t3
+
+    if(judeEnd()){
+    	 var boss_power_end=setInterval(function(){
+																if(finish){
+																clearInterval(boss_power_end);
+																finish = false;
+																//如果我方在BOSS的秘技攻击下还活着
+																if (b.HP > 0) {
+																enemyIndex++;
+																if (enemyIndex < enemysArray.length) {
+																	setTimeout(enemysAction, 2000);
+																	} else {
+																		enemyIndex = 0;
+																		count++;
+																		setTimeout(dialogShow, 2000);
+																		ai = false;
+																	}// if (enemyIndex < enemysArray.length) 
+																}
+																//如果我方在BOSS的秘技攻击下死了
+																else{
+																deadEvent(null,b);
+																var tm3 = setInterval(function() {
+																	if (finish) {
+																		finish = false;
+																		clearInterval(tm3);
+																		enemyIndex++;
+																		if (enemyIndex < enemysArray.length) {
+																			setTimeout(enemysAction, 2000);
+																		} else {
+																			enemyIndex = 0;
+																			count++;
+																			setTimeout(dialogShow, 2000);
+																			ai = false;
+																		}
+																	}//finish
+																}); //tm3   
+															}//else
+														}//finish
+		});//var boss_skill_end
+    }
+    else{
+    	 var we_power_end=setInterval(function (){
+											if (finish){											
+												clearInterval(we_power_end);
+												finish=false;
+												
+												if (b.HP <= 0) {
+													deadEvent(a,b);
+													we_power_end = setInterval(function() {
+														if (finish) {
+															finish = false;
+															clearInterval(we_power_end);
+															if (judeEnd()) {
+																//---恢复精神力---
+															    recoverSpirit();
+																//-----------
+															    enemyRoundShow();
+																end = true;
+																ai = true;
+																setTimeout(enemysAction, 500);
+															}else{ end=false;}
+														}
+													});
+												}else{
+													b.dy = 240;
+													if (judeEnd()) {
+													          	//---恢复精神力---
+															    recoverSpirit();
+																//-----------
+																enemyRoundShow();
+																end = true;
+																ai = true;
+																setTimeout(enemysAction, 500);
+															}else{ end=false;}}
+											}
+										});
+    }
+
+	}//real penhuolong
+
+    if(a instanceof roleInfo){
+          normalAttack(a,b); 
+          att_end = setInterval(function() {
+          if (finish) {
+            finish = false;
+            clearInterval(att_end);
+			
+            if (b.HP > 0) {
+                normalAttack(b,a);
+                var t1 = setInterval(function() {
+                    if (finish) {
+                        finish = false;
+                        clearInterval(t1);
+						
+                        if (a.HP > 0) {
+                            
+                            var n = Math.floor(Math.random() * 100) + 1; 
+							//var n=0;
+                            if (n <= skillSuccess) { //
+							    realWanNianYuanGuBingHunJue(a,b);
+								
+                            } 	
+							else{
+							
+                                failAlert("发动失败",a);
+									a.dy = 240;
+									if (judeEnd()) {
+										//-
+										 recoverSpirit();
+										//-----------
+										setTimeout(enemyRoundShow,1500);
+										end = true;
+										ai = true;
+										setTimeout(enemysAction,3000);
+									}
+									else{ end=false;}
+                            }
+                        } 
+						
+						else {
+                            deadEvent(null,a);
+                            var t7 = setInterval(function() {
+                                if (finish) {
+                                    finish = false;
+                                    clearInterval(t7);
+                                    if (!judgeOver()) {
+                                        if (judeEnd()) {
+											//--
+											 recoverSpirit();
+											//-----------
+											enemyRoundShow();
+                                            end = true;
+                                            ai = true;
+                                            enemysAction();
+                                        }else{end=false;}
+                                    } 
+									else {game_over_page();}
+                                }
+                            });//
+                        }
+                    }//
+                });//
+            }
+			//
+			else {
+                a.dy = 240;
+                deadEvent(a,b);
+                var t8 = setInterval(function() {
+                    if (finish) {
+                        finish = false;
+                        clearInterval(t8);
+                        if (judeEnd()) {
+								//--
+								recoverSpirit();
+								//-----------
+								enemyRoundShow();
+                            end = true;
+                            ai = true;
+                            setTimeout(enemysAction);
+                        }else{ end=false;}
+                        
+                    }
+                });//
+            }
+        }//
+    });//
+    }else{
+    	realWanNianYuanGuBingHunJue(a,b);
+    }
+
+}
 function PSoulAttack() {
 	//保存敌人的下标
     var tIndex;
