@@ -514,8 +514,7 @@ function touchStart(e){//触摸
             setTimeout(function() {
                 clearArr(startShow);
                 showStart = false;
-                //dialogShow();
-                
+                //dialogShow();               
                 //showMapName();
                 //drawAll();    
                 gameBGShow();
@@ -612,7 +611,6 @@ function touchStart(e){//触摸
                 }
             }
             showRolesDetailStatus(rolesArray[tmpIndex],statusBg.sx,statusBg.sy);
-           // skillStatus(rolesArray[tmpIndex]);
         }
         if (MouseOnObj(x, y, rightArrow)) {
             clearArray(statusArray);
@@ -709,7 +707,6 @@ function touchStart(e){//触摸
                   if(n>66 && n<=100){skillVar = 200;}
                 }
 
-
                 eval(fl + '(rolesArray[rolesIndex],enemysArray[tIndex])');
             } else if (MouseClickOnRolesIndex(x, y)) { //鼠标点击在已选中的角色上           
                 clearArray(rangeShow);
@@ -732,6 +729,7 @@ function touchStart(e){//触摸
                            tIndex = i;    
                    }
                 }
+
                 eval(fl + '(rolesArray[rolesIndex],enemysArray[tIndex])');
             } else if (MouseClickOnRolesIndex(x, y)) { //鼠标点击在已选中的角色上           
                 clearArray(rangeShow);
@@ -936,10 +934,11 @@ function touchStart(e){//触摸
         if (MouseOnObj(x, y, ensure)) { //判断鼠标是否在目标上
             doUseSX();//先用了神行，然后发动怒攻击
             //行走恢复
-            ;
+            recover_walk();
             for (var i = 0; i < powerArrays.length; i++) {
                 if (rolesArray[rolesIndex].powers[tp] == powerArrays[i].id) {
                     fl = powerArrays[i].func;
+                    powerid = powerArrays[i].id;
                     powertmp = powerArrays[i].p;
                     powerVar = powerArrays[i].powerVar;
                     powerSuccess = powerArrays[i].success;
@@ -951,6 +950,27 @@ function touchStart(e){//触摸
             if (rolesArray[rolesIndex].pow < powertmp) {
                 powAlert();
             } else {
+              if(powerid == 4){
+                if(deadArray.length>0){
+                  powerShow = false;
+                  menuShow = false;
+                  powerConfirmShow = false;
+                  end = true;
+                  powerFuHuo = true;
+                  clearArray(rangeShow);
+                  clearArray(confirmArray);
+                  clearArray(powerArray);
+                  clearArray(everything3);
+                  afterRecoverEvent(); 
+                } 
+                else{
+                  powerConfirmShow = false;
+                  powerShow = true;
+                  clearArray(confirmArray);
+                  noDeadAlert();
+                }                 
+              }
+              else{
                 powerConfirmShow = false;
                 powerAtt = true;
                 powerShow = false;
@@ -958,7 +978,9 @@ function touchStart(e){//触摸
                 clearArray(confirmArray);
                 clearArray(powerArray);
                 clearArray(everything3);
+              }
             }
+
         } else 
         if (MouseOnObj(x, y, cancel)) {
             powerConfirmShow = false;
@@ -1092,7 +1114,7 @@ function touchStart(e){//触摸
            clearArray(confirmArray);
        }
     }else
-    if (itemConfirmShow) { //道具是否确定使用函数
+    if(itemConfirmShow) { //道具是否确定使用函数
         if(!isRoleHasUsedItem(rolesArray[rolesIndex])){
         if (MouseOnObj(x, y, ensure)) { //如果点击确定按钮
             //行走恢复
@@ -1115,7 +1137,12 @@ function touchStart(e){//触摸
                     clearArray(everything3);
                     afterRecoverEvent();            //执行复活函数
                 }
-                else{noDeadAlert();}
+                else{
+                  itemConfirmShow = false;
+                  itemShow = true;
+                  clearArray(confirmArray);
+                  noDeadAlert();
+                }
             }//if(rolesArray[rolesIndex].items[tp].id==3)结束
             else{            //选择了其他的道具
               finish = false;
@@ -1179,17 +1206,15 @@ function touchStart(e){//触摸
     }else
     if(afterRecoverShow){ //复活
       if (MouseOnObj(x, y, ItemBg)){//点击在背景内    
-     //     alert(rolesArray[rolesIndex].name);
           var t=deadArray.length;
-          console.log("t是"+t);
           tpp = (ty - ItemBg.sy ) / rpx;//说明选择复活的人物是那个
-            console.log("tp3是"+tpp);
           if (y > ItemBg.sy+ 2 / 3 *rpx && y < ItemBg.sy+  2 / 3 *rpx + t * rpx && x > ItemBg.sx && x < ItemBg.sx + 4 * rpx) {
                 afterRecoverShow = false;
                 console.log("afterRecoverShow是"+afterRecoverShow);
                 clearArray(confirmArray);
                 clearArray(itemArray);//清空放死亡人物的那个框
-                reconverAction(rolesArray[rolesIndex]);//执行复活函数=====rolesArray[rolesIndex]
+                if(powerFuHuo){eval(fl + '(enemysArray[tIndex],rolesArray[rolesIndex])');}               
+                else{reconverAction(rolesArray[rolesIndex]);}//执行复活函数=====rolesArray[rolesIndex]
                 console.log("afterRecoverShow后是"+afterRecoverShow);
         }
        }

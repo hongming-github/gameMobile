@@ -11,35 +11,25 @@ function SRecoverHP(){
     }
     thp = rolesArray[rolesIndex].HP - thp;//用来几率实际上加了多少的血量
     var s = "HP+" + thp;
-//    var t = new text(s, rolesArray[rolesIndex].sx, rolesArray[rolesIndex].sy + 1 / 2 * rpx, "rgb(0,255,0)", "bold 30px FangSong");
     var t = new text(s, rolesArray[rolesIndex].mapX, rolesArray[rolesIndex].mapY + 1 / 2 * rpx, "rgb(0,255,0)", "bold 30px FangSong"); 
     var hx = new Image();
     hx.src = effect;
-//   var RecoverShow = new pic(rolesArray[rolesIndex].sx - rpx, rolesArray[rolesIndex].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, hx);
- //   var RecoverShow = new pic(rolesArray[rolesIndex].sx - rpx, rolesArray[rolesIndex].sy - rpx,rolesArray[rolesIndex].sx - rpx, rolesArray[rolesIndex].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, hx);
-     var RecoverShow = new pic(rolesArray[rolesIndex].mapX - rpx,rolesArray[rolesIndex].mapY - rpx,rolesArray[rolesIndex].sx - rpx, rolesArray[rolesIndex].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, hx);
+    var RecoverShow = new pic(rolesArray[rolesIndex].mapX - rpx,rolesArray[rolesIndex].mapY - rpx,rolesArray[rolesIndex].sx - rpx, rolesArray[rolesIndex].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, hx);
     attackShow.push(t);
     attackShow.push(RecoverShow);
     t1 = setInterval(function() {
-     //   t.sy--;
         t.mapY--;
         if (RecoverShow.dx < 4900) {
             RecoverShow.dx += 350;
         } else {
             RecoverShow.dx = 0;
         }
-        //drawAll();
         console.log("t.mapY:"+t.mapY+"rolesArray[rolesIndex].mapY:"+rolesArray[rolesIndex].mapY);
         if(t.mapY == rolesArray[rolesIndex].mapY){
            clearInterval(t1);
             clearArray(attackShow);
             spiritHuiChun=false;
         }
-    /*    if (t.sy == rolesArray[rolesIndex].sy) {
-            clearInterval(t1);
-            clearArray(attackShow);
-            spiritHuiChun=false;
-        }*/
     },
     75);
 

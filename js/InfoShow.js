@@ -43,7 +43,7 @@ function putRec(x,y){
 复活框的内容
 */
 function afterRecoverEvent(){
-	afterRecoverShow=true;
+   afterRecoverShow=true;
    //背景图片
    ItemBg = new picture(9 * rpx, 5 * rpx,9 * rpx, 5 * rpx, 8 * rpx, 5 * rpx, infoShowBg);
    itemArray.push(ItemBg);
@@ -646,10 +646,8 @@ function noDeadAlert() {
 	var r1 = new text(aa,9*rpx,4*rpx ,9*rpx ,4*rpx , "#F9F900", "bold 40px KaiTi");
     tishi.push(shadow);
     tishi.push(r1);
-    //drawAll();
     setTimeout(function() {
         clearArray(tishi);
-        //drawAll();
     },
     2500); 
 }

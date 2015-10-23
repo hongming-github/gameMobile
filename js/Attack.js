@@ -1336,7 +1336,6 @@ function WanNianYuanGuBingHunJue(a,b){//a attack b
   var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
   attackShow.push(hs);
 
-  //喷火龙字样
   var t2 = setInterval(function() {
       var sn = new text(powerName.charAt(countInterval),  hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx,hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx, "rgb(153,50,204)", "bold 40px KaiTi");
       attackShow.push(sn);
@@ -1561,6 +1560,95 @@ function WanNianYuanGuBingHunJue(a,b){//a attack b
     }
 
 }
+function ZhaoHunDaFa(enemy,obj) {
+
+                                var h = new Image();
+                                h.src = obj.halfBody;
+                                var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
+								attackShow.push(hs);
+								//覆盖层
+								FuGaiCeng(enemy,obj);
+                                var t2 = setInterval(function() {
+                                	finish = false;
+                                    var sn = new text(powerName.charAt(countInterval), hs.sx-mapMovX + hs.swidth + countInterval * rpx, hs.sy-mapMovY + hs.sheight / 2 + rpx,hs.sx-mapMovX + hs.swidth + countInterval * rpx, hs.sy-mapMovY + hs.sheight / 2 + rpx, "rgb(255,255,255)", "bold 40px KaiTi");
+                                    attackShow.push(sn);                               
+                                    countInterval++;
+                                    if (countInterval == powerName.length + 1) {
+                                        countInterval = 0;
+                                        clearInterval(t2);
+                                        clearArray(attackShow);
+                                        clearArray(shadowShow);
+                                        finish=true;
+                                    }
+								}, 
+								500);//t2结束
+	var aaaa=100;
+	//判断只要是活着的队友即可；----------------
+	
+	var a=obj.mapX/48;
+	var b=obj.mapY/48;
+	var pos=[a,b];//主角的左上角/48的坐标
+	var aa=GetRound(pos);//得到主角上下左右的四个点的数组,右下左上的顺序
+	//判断1.是否和障碍物重合，2.是否有敌人在这个位置，3.是否有队友在这个位置上，4.是否在画布范围内 然后复活
+	
+	for(var i=0;i<aa.length;i++){
+		var t=aa[i].split(",");//split() 方法用于把一个字符串分割成字符串数组。
+		console.log("t0"+t[0]+" ");
+		console.log("t1"+t[1]+" ");
+		t[0]=parseInt(t[0]);
+		t[1]=parseInt(t[1]);
+	  if(IsObstacle(aa[i])||IsOutScreen([t[0],t[1]])||IsEnemyHere([t[0],t[1]])||IsBuddyHere([t[0],t[1]])){
+	 console.log("i是");
+         if(i!=3){continue;}
+		 else {noEmptyPlace();}	 
+      
+	  }
+      else{		
+	       for(var ii=0;ii<rolesArray.length;ii++){
+		      if( rolesArray[ii].name==deadArray[tpp-1].name){
+				   rolesArray[ii].mapX=t[0]*rpx;
+				   rolesArray[ii].mapY=t[1]*rpx;
+				   rolesArray[ii].sx=rolesArray[ii].mapX;
+				   rolesArray[ii].sy=rolesArray[ii].mapY;
+				   rolesArray[ii].dy=240;
+				   rolesArray[ii].sh=rpx;
+				   rolesArray[ii].dh=rpx;				   
+			       rolesArray[ii].HP=powerVar;
+				   aaaa=ii;
+		       }
+	       }
+		   //处理后事
+		   deadArray.splice(tpp-1, 1);//死亡数组删除那个复活的对象
+		   break;
+	  }//else
+	  
+	}//for
+
+	var RecoverShow = new pic(rolesArray[aaaa].mapX - rpx, rolesArray[aaaa].mapY - rpx,rolesArray[aaaa].sx - rpx, rolesArray[aaaa].sy - rpx, 3 * rpx, 3 * rpx, 0, 0, 350, 350, getAlive);
+	attackShow.push(RecoverShow);	
+	var lt = setInterval(function() {	if(finish)   {           
+	if (RecoverShow.dx < 4900) {RecoverShow.dx += 350;} 
+	else {RecoverShow.dx = 0;finish=false;}	}					
+	},75);
+	setTimeout(function (){
+	//	if(finish){
+	               clearInterval(lt);
+	               clearArray(attackShow);
+	   			   obj.dy = 240;
+	 			   if (judeEnd()) {
+					//---恢复精神力---
+					recoverSpirit();
+					//-----------
+					enemyRoundShow();
+					end = true;
+					ai = true;
+					setTimeout(enemysAction, 2000);
+	  				}else{ end=false;}	  				
+	  			//    }//finish
+                    }, 2000);
+         
+				
+}
 function PSoulAttack() {
 	//保存敌人的下标
     var tIndex;
@@ -1644,7 +1732,6 @@ function PSoulAttack() {
                                             var t5 = setInterval(function() {
                                                 hp.swidth--;
                                                 countInterval++;
-                                              //  drawAll();
                                                 if (countInterval == tVar2 || hp.swidth == 0) {
                                                     countInterval = 0;
                                                     clearInterval(t5);

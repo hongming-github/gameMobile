@@ -72,7 +72,6 @@ function reconverAction(obj) {
 	var a=obj.mapX/48;
 	var b=obj.mapY/48;
 	var needDongHua=true;
-	//console.log("执行复活人是"+obj.name);
 	//----------------------------------
 	var pos=[a,b];//主角的左上角/48的坐标
 	var aa=GetRound(pos);//得到主角上下左右的四个点的数组,右下左上的顺序
@@ -97,18 +96,20 @@ function reconverAction(obj) {
 				   rolesArray[ii].mapY=t[1]*rpx;
 				   rolesArray[ii].sx=rolesArray[ii].mapX;
 				   rolesArray[ii].sy=rolesArray[ii].mapY;
-				   rolesArray[ii].dy = 0;
+				   rolesArray[ii].dy = 240;
 				   rolesArray[ii].sh=rpx;
-				   rolesArray[ii].dh=rpx;
-				   rolesArray[ii].HP = 10;
+				   rolesArray[ii].dh=rpx;				   
+			       rolesArray[ii].HP = 10;
 				   aaaa=ii;
 		       }
 	       }
 		   //处理后事
+		   if(powerid != 4){
 		   rolesArray[rolesIndex].items[tp].num -= 1;//道具数量-1
 		   if (rolesArray[rolesIndex].items[tp].num == 0) {
 			  rolesArray[rolesIndex].items.splice(tp, 1);//剔除这个道具
 		   }
+	    	}
 		   deadArray.splice(tpp-1, 1);//死亡数组删除那个复活的对象
 		   break;
 	  }//else
@@ -126,7 +127,7 @@ function reconverAction(obj) {
 	setTimeout(function (){
 	               clearInterval(lt);
 	               clearArray(attackShow);
-                    }, 1000);
+	               }, 1000);
 					
 	}
 				
