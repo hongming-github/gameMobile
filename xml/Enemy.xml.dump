@@ -149,7 +149,7 @@
 		<img>image/action/Nj.png</img>
 		<halfBody>image/halfbody/Nj.png</halfBody>
 		<HP>100</HP>
-		<MP>30</MP>
+		<MP>50</MP>
 		<pow>0</pow>
 		<equipSkill>0</equipSkill>
 		<furySkill>0</furySkill>
@@ -167,7 +167,7 @@
 		<tripleCRI>1</tripleCRI>
 		<type>1</type>
 		<skill>
-			<skillId>9</skillId>
+			<skillId>15</skillId>
 		</skill>
 	</enemy>
 	<enemy id="8">

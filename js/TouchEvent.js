@@ -707,7 +707,11 @@ function touchStart(e){//触摸
                   if(n>66 && n<=100){skillVar = 200;}
                 }
 
+                if(weSkillAttackFail){skillSuccess=0;}
+
                 eval(fl + '(rolesArray[rolesIndex],enemysArray[tIndex])');
+                
+                weSkillAttackFail=false;
             } else if (MouseClickOnRolesIndex(x, y)) { //鼠标点击在已选中的角色上           
                 clearArray(rangeShow);
                 skillAtt = false;

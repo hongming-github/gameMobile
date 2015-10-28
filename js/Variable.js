@@ -179,10 +179,11 @@ var roleStopMove = false;
 var enemyStopMove = false;
 var powerFuHuo = false;//用于判定afterRecoverShow为true时，是用技能复活还是道具
 var weNormalAttackFail = false;//飞隐双身
-var roleId;//飞隐双身 用来记录哪个角色释放的技能
+var FeiYinShuangShenRoleId;//飞隐双身 用来记录哪个角色释放的技能
 var enemyNormalAttackFail = false;//飞隐双身
 var enemyNormalAttackFailCount;//飞隐双身
 var weSkillAttackFail = false;//无影无踪
+var WuYingWuZongRoleId;//无影无踪 用来记录哪个角色释放的技能
 var enemySkillAttackFail = false;//无影无踪
 var enemySkillAttackFailCount;//无影无踪
 var mapObstancle=[

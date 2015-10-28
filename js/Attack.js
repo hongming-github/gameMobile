@@ -78,8 +78,13 @@ function BossSkillAttacked(a,b){
 				skillName = skillArrays[i].name;
 			}
 	}
-	//var n = Math.floor(Math.random() * 100) + 1;
-	var n=0;
+	var n = Math.floor(Math.random() * 100) + 1;
+	//var n=0;
+	if(enemySkillAttackFail && (b instanceof roleInfo) && (b.id == WuYingWuZongRoleId)){
+		n = 0;
+		enemySkillAttackFailCount--;
+		if(enemySkillAttackFailCount == 0){enemySkillAttackFail = false;}
+	}
     if((n<skillSuccess)&&(skilltmp<=a.MP)){
             console.log("开始调用秘技攻击"+skillid);
                 if(skillid == 11){
@@ -794,7 +799,7 @@ function FeiYinShuangShen(a,b){//a attack b
 
     function realFeiYinShuangShen(a,b){
     	   if(a instanceof roleInfo){
-    	   	roleId = a.id;
+    	   	FeiYinShuangShenRoleId = a.id;
     	   	enemyNormalAttackFailCount = 5;
     	   	enemyNormalAttackFail = true;
     	   }
@@ -948,7 +953,7 @@ function FeiYinShuangShen(a,b){//a attack b
 										});
     }
 
-	}//real penhuolong
+	}
 
     if(a instanceof roleInfo){
           normalAttack(a,b); 
@@ -1044,12 +1049,13 @@ function WuYingWuZong(a,b){//a attack b
 
     function realWuYingWuZong(a,b){
     	   if(a instanceof roleInfo){
-    	   	enemyNormalAttackFailCount = 5;
-    	   	enemyNormalAttackFail = true;
+    	   	WuYingWuZongRoleId = a.id;
+    	   	enemySkillAttackFailCount = 5;
+    	   	enemySkillAttackFail = true;
     	   }
            else{
            	a.MP -= skilltmp;
-           	weNormalAttackFail = true;
+           	weSkillAttackFail = true;
            }
            
 
@@ -1066,7 +1072,6 @@ function WuYingWuZong(a,b){//a attack b
   var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
   attackShow.push(hs);
 
-  //喷火龙字样
   var t2 = setInterval(function() {
       var sn = new text(skillName.charAt(countInterval),  hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx,hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx, "rgb(153,50,204)", "bold 40px KaiTi");
       attackShow.push(sn);
@@ -1079,7 +1084,7 @@ function WuYingWuZong(a,b){//a attack b
        }
      },
   500);//t2
-    var t3=setInterval(function(){
+  var t3=setInterval(function(){
       if (finish) {
 	        clearInterval(t3);
             finish = false;
@@ -1098,10 +1103,26 @@ function WuYingWuZong(a,b){//a attack b
                          clearInterval(t4);
                          a.dy = 240;
                          clearArray(attackShow);
-					     finish=true;
+					     //finish=true;
                       }
                       },
             50);//t4
+	        if (hp.swidth > 0) {
+                hpShow.push(hpBox);
+                hpShow.push(hp);
+                var tVar2 = Math.floor(rpx * skillVar / b.fullHP) + 1;
+                var t5 = setInterval(function() {
+                          hp.swidth--;
+                          countInterval++;
+                          if (countInterval == tVar2 || hp.swidth <= 0) {
+                              countInterval = 0;
+                              clearInterval(t5);
+                              clearArray(hpShow);
+							  finish=true;
+                          }
+                       },
+                50);//t5
+            }// if (hp.swidth > 0) 
 	  }//finish
   });//t3
 
@@ -1169,7 +1190,7 @@ function WuYingWuZong(a,b){//a attack b
 													});
 												}else{
 													b.dy = 240;
-													if (judeEnd()) {
+													if (judeEnd()){
 													          	//---恢复精神力---
 															    recoverSpirit();
 																//-----------
@@ -1182,7 +1203,7 @@ function WuYingWuZong(a,b){//a attack b
 										});
     }
 
-	}//real penhuolong
+	}
 
     if(a instanceof roleInfo){
           normalAttack(a,b); 
@@ -2564,7 +2585,7 @@ function normalAttack(a, b) {//a攻击b
 	if(weNormalAttackFail && (a instanceof roleInfo)){
 		n = 0;
 	}
-	if(enemyNormalAttackFail && (b instanceof roleInfo) && (b.id == roleId)){
+	if(enemyNormalAttackFail && (b instanceof roleInfo) && (b.id == FeiYinShuangShenRoleId)){
 		n = 0;
 		enemyNormalAttackFailCount--;
 		if(enemyNormalAttackFailCount == 0){enemyNormalAttackFail = false;}

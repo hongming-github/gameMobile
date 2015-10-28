@@ -183,7 +183,6 @@ function judeEnd() {
     for (var i = 0; i < rolesArray.length; i++) {
     
         if (((rolesArray[i].dy != 240)&&(rolesArray[i].sh !=0))||((rolesArray[i].sh ==0)&&(rolesArray[i].dh !=0))) {
-			//alert(i);
 			return false;
 		}
     }
