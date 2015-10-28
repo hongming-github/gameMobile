@@ -172,12 +172,12 @@
 		<skillId>15</skillId> 
 		<skillName>无影无踪</skillName>
 		<skillImg>image/skill/Lhz.jpg</skillImg>
-		<skillMP>20</skillMP>
-		<skillDescription>对敌人造成140点的伤害</skillDescription>
-		<skillSuccess>50</skillSuccess>
-		<skillFunc>SPengHuoLong</skillFunc>
-		<skillVar>140</skillVar>
-		<skillOther>特殊说明</skillOther>
+		<skillMP>50</skillMP>
+		<skillDescription>躲开敌人秘技攻击（敌方）</skillDescription>
+		<skillSuccess>100</skillSuccess>
+		<skillFunc>WuYingWuZong</skillFunc>
+		<skillVar>0</skillVar>
+		<skillOther>一场战斗只能使用1次,接下来的后面5次对自身的秘技攻击将全部回避开（我方）</skillOther>
 		<effect>image/effect/1.png</effect>
 	</skill>
 </skills>
