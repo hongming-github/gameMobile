@@ -149,13 +149,11 @@ function dialog() {
 	
     var dialogBox = new picture(0,340,0, 340, 960, 250, dialogBoxImage);
     dialogRole = new picture(96,390,96, 390, 170, 170, dialogRoleImage);
-    //drawAll();
     dialogText = new text(tt,270,470, 270,470, "rgb(0,0,0)", "20px FangSong");
     dialogArray.push(dialogBox);
     if (tf) {
     }
     dialogArray.push(dialogText);
-    //drawAll();
 }
 /*
 	判断有没有触发对话事件   

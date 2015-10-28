@@ -718,8 +718,7 @@ function SPengHuoLong(a,b){//a attack b
                             var n = Math.floor(Math.random() * 100) + 1; 
 							//var n=0;
                             if (n <= skillSuccess) { //
-							    realPenHuoLong(a,b);
-								
+							    realPenHuoLong(a,b);							
                             } 	
 							else{
 							
@@ -787,6 +786,240 @@ function SPengHuoLong(a,b){//a attack b
     });//
     }else{
     	realPenHuoLong(a,b);
+    }
+
+}
+//飞隐双身
+function FeiYinShuangShen(a,b){//a attack b
+
+    function realFeiYinShuangShen(a,b){
+    	   if(a instanceof roleInfo){
+    	   	enemyNormalAttackFailCount = 5;
+    	   	enemyNormalAttackFail = true;
+    	   }
+           else{
+           	a.MP -= skilltmp;
+           	weNormalAttackFail = true;
+           }
+           
+
+  //显示半身像
+  var tVar1 = Math.floor(rpx * b.HP / b.fullHP) + 1;
+  var hp = new rectangle(b.mapX, b.mapY - 9,b.mapX, b.mapY - 9, tVar1, 5, "rgb(0,255,0)");
+  var hpBox = new rectangle(b.mapX, b.mapY - 10,b.mapX, b.mapY - 10, rpx, 7, "rgb(0,0,0)");
+  var e = new Image();
+  e.src = effect;
+  var skillShow = new pic(b.mapX - rpx - 6, b.mapY - rpx - 15,b.mapX - rpx - 6, b.mapY - rpx - 15, 3 * rpx, 3 * rpx, 0, 0, 350, 350, e);
+  var attackText = new text("-" + skillVar,b.mapX + rpx / 4, b.mapY + rpx / 2, b.mapX + rpx / 4, b.mapY + rpx / 2, "rgb(255,0,0)", "bold 30px FangSong");
+  var h = new Image();
+  h.src = a.halfBody;
+  var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
+  attackShow.push(hs);
+
+  //喷火龙字样
+  var t2 = setInterval(function() {
+      var sn = new text(skillName.charAt(countInterval),  hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx,hs.sx -mapMovX+ hs.swidth + countInterval * rpx, hs.sy -mapMovY+ hs.sheight / 2 + rpx, "rgb(153,50,204)", "bold 40px KaiTi");
+      attackShow.push(sn);
+      countInterval++;
+      if (countInterval == skillName.length + 1) {
+           countInterval = 0;
+           clearInterval(t2);
+           clearArray(attackShow);
+           finish = true;
+       }
+     },
+  500);//t2
+    var t3=setInterval(function(){
+      if (finish) {
+	        clearInterval(t3);
+            finish = false;
+            attackAction(a);
+            flicker(b);
+            attackShow.push(attackText);
+            attackShow.push(skillShow);
+			var t4 = setInterval(function() {
+                     attackText.mapY--;
+                     if (skillShow.dx < 4900) {
+                          skillShow.dx += 350;
+                     } else {
+                          skillShow.dx = 0;
+                     }
+                    if (attackText.mapY == b.mapY) {
+                         clearInterval(t4);
+                         a.dy = 240;
+                         clearArray(attackShow);
+					     finish=true;
+                      }
+                      },
+            50);//t4
+	  }//finish
+  });//t3
+
+    if(judeEnd()){
+    	 var boss_skill_end=setInterval(function(){
+																if(finish){
+																clearInterval(boss_skill_end);
+																finish = false;
+																//如果我方在BOSS的秘技攻击下还活着
+																if (b.HP > 0) {
+																enemyIndex++;
+																if (enemyIndex < enemysArray.length) {
+																	setTimeout(enemysAction, 2000);
+																	} else {
+																		enemyIndex = 0;
+																		count++;
+																		setTimeout(dialogShow, 2000);
+																		ai = false;
+																	}// if (enemyIndex < enemysArray.length) 
+																}
+																//如果我方在BOSS的秘技攻击下死了
+																else{
+																deadEvent(null,b);
+																var tm3 = setInterval(function() {
+																	if (finish) {
+																		finish = false;
+																		clearInterval(tm3);
+																		enemyIndex++;
+																		if (enemyIndex < enemysArray.length) {
+																			setTimeout(enemysAction, 2000);
+																		} else {
+																			enemyIndex = 0;
+																			count++;
+																			setTimeout(dialogShow, 2000);
+																			ai = false;
+																		}
+																	}//finish
+																}); //tm3   
+															}//else
+														}//finish
+		});//var boss_skill_end
+    }
+    else{
+    	 var we_skill_end=setInterval(function (){
+											if (finish){											
+												clearInterval(we_skill_end);
+												finish=false;
+												
+												if (b.HP <= 0) {
+													deadEvent(a,b);
+													we_skill_end = setInterval(function() {
+														if (finish) {
+															finish = false;
+															clearInterval(we_skill_end);
+															if (judeEnd()) {
+																//---恢复精神力---
+															    recoverSpirit();
+																//-----------
+															    enemyRoundShow();
+																end = true;
+																ai = true;
+																setTimeout(enemysAction, 500);
+															}else{ end=false;}
+														}
+													});
+												}else{
+													b.dy = 240;
+													if (judeEnd()) {
+													          	//---恢复精神力---
+															    recoverSpirit();
+																//-----------
+																enemyRoundShow();
+																end = true;
+																ai = true;
+																setTimeout(enemysAction, 500);
+															}else{ end=false;}}
+											}
+										});
+    }
+
+	}//real penhuolong
+
+    if(a instanceof roleInfo){
+          normalAttack(a,b); 
+          att_end = setInterval(function() {
+          if (finish) {
+            finish = false;
+            clearInterval(att_end);
+			
+            if (b.HP > 0) {
+                normalAttack(b,a);
+                var t1 = setInterval(function() {
+                    if (finish) {
+                        finish = false;
+                        clearInterval(t1);
+						
+                        if (a.HP > 0) {
+                            
+                            var n = Math.floor(Math.random() * 100) + 1;
+                            if (n <= skillSuccess) { //
+							    realFeiYinShuangShen(a,b);								
+                            } 	
+							else{
+							
+                                failAlert("发动失败",a);
+									a.dy = 240;
+									if (judeEnd()) {
+										//-
+										 recoverSpirit();
+										//-----------
+										setTimeout(enemyRoundShow,1500);
+										end = true;
+										ai = true;
+										setTimeout(enemysAction,3000);
+									}
+									else{ end=false;}
+                            }
+                        } 
+						
+						else {
+                            deadEvent(null,a);
+                            var t7 = setInterval(function() {
+                                if (finish) {
+                                    finish = false;
+                                    clearInterval(t7);
+                                    if (!judgeOver()) {
+                                        if (judeEnd()) {
+											//--
+											 recoverSpirit();
+											//-----------
+											enemyRoundShow();
+                                            end = true;
+                                            ai = true;
+                                            enemysAction();
+                                        }else{end=false;}
+                                    } 
+									else {game_over_page();}
+                                }
+                            });//
+                        }
+                    }//
+                });//
+            }
+			//
+			else {
+                a.dy = 240;
+                deadEvent(a,b);
+                var t8 = setInterval(function() {
+                    if (finish) {
+                        finish = false;
+                        clearInterval(t8);
+                        if (judeEnd()) {
+								//--
+								recoverSpirit();
+								//-----------
+								enemyRoundShow();
+                            end = true;
+                            ai = true;
+                            setTimeout(enemysAction);
+                        }else{ end=false;}
+                        
+                    }
+                });//
+            }
+        }//
+    });//
+    }else{
+    	realFeiYinShuangShen(a,b);
     }
 
 }
@@ -1562,7 +1795,7 @@ function WanNianYuanGuBingHunJue(a,b){//a attack b
 }
 function ZhaoHunDaFa(enemy,obj) {
 
-                                var h = new Image();
+    var h = new Image();
                                 h.src = obj.halfBody;
                                 var hs = new picture(48*5-mapMovX, 48*4-mapMovY,48*5-mapMovX, 48*4-mapMovY, 4 * rpx, 4 * rpx, h);
 								attackShow.push(hs);
@@ -2078,8 +2311,17 @@ function normalAttack(a, b) {//a攻击b
     var m1 = Math.floor(Math.random() * 5) + 1; //获取1---6的随机数,给我方用的
 	var m2 = Math.floor(Math.random() * 5) + 1; //获取1---6的随机数,给敌方BOSS用的
 	//--------------------------------------以上是怒攻击----------------------
+	if(weNormalAttackFail && (a instanceof roleInfo)){
+		n = 0;
+	}
+	if(enemyNormalAttackFail && (b instanceof roleInfo)){
+		n = 0;
+		enemyNormalAttackFailCount--;
+		if(enemyNormalAttackFailCount == 0){enemyNormalAttackFail = false;}
+	}
     if ((n <= x)||(a instanceof enemyInfo )&&((b instanceof roleInfo)&&(b.spiritShanBi==1)) ){//-闪避功能的模块-如果我方打开闪避功能了，当敌人攻击我方时，启动闪避--
 		hurt = 0; //如果产生的随机数小于命中失误率，攻击MISS，
+		weNormalAttackFail = false;
 		if((a instanceof roleInfo)&&(a.spiritJueSha==1)){
 			a.spiritJueSha=0;
 		}else
